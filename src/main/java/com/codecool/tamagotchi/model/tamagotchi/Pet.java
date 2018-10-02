@@ -5,7 +5,6 @@ import com.codecool.tamagotchi.model.tamagotchi.classes.Earth;
 import com.codecool.tamagotchi.model.tamagotchi.classes.Water;
 import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
 
-import java.lang.reflect.WildcardType;
 import java.util.Random;
 
 public class Pet {
