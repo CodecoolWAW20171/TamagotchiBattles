@@ -6,6 +6,7 @@ import com.codecool.tamagotchi.model.tamagotchi.classes.Water;
 import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
 
 import java.lang.reflect.WildcardType;
+import java.util.Random;
 
 public class Pet {
     private String name;
@@ -16,8 +17,10 @@ public class Pet {
     private double health = 100;
     private Action state;
 
-    private double WEAKER_ATTACK = 0.75;
-    private double STRONGER_ATTACK = 1.25;
+    private final double WEAKER_ATTACK = 0.75;
+    private final double STRONGER_ATTACK = 1.25;
+
+    private int playersTwoDefencePoints;
 
     public Pet(String name, int attack, int defence, int speed) {
         this.name = name;
@@ -27,10 +30,13 @@ public class Pet {
     }
 
     public void primaryAttack(Pet playerOne, Pet playerTwo) {
-        int attackPower = playerOne.getAttack();
-        attackPower = checkPrimaryTypes(playerOne, playerTwo, attackPower);
-        attackPower = attackPower - playerTwo.getDefence();
-        playerTwo.setHealth(playerTwo.getHealth() - attackPower);
+        if (!checkIfEvaded(playerOne, playerTwo)) {
+            int attackPower = playerOne.getAttack();
+            playersTwoDefencePoints = getSecondPlayersDefence(playerTwo);
+            attackPower = checkPrimaryTypes(playerOne, playerTwo, attackPower);
+            attackPower = attackPower - playersTwoDefencePoints;
+            if (attackPower > 0) playerTwo.setHealth(playerTwo.getHealth() - attackPower);
+        }
     }
 
     private int checkPrimaryTypes(Pet playerOne, Pet playerTwo, int power) {
@@ -46,11 +52,14 @@ public class Pet {
     }
 
     public void secondaryAttack(Pet playerOne, Pet playerTwo) {
-        double SECONDARY_ATTACK_REDUCTION = 0.75;
-        int attackPower = (int) (playerOne.getAttack() * SECONDARY_ATTACK_REDUCTION);
-        attackPower = checkSecondaryTypes(playerOne, playerTwo, attackPower);
-        attackPower = attackPower - playerTwo.getDefence();
-        playerTwo.setHealth(playerTwo.getHealth() - attackPower);
+        if (!checkIfEvaded(playerOne, playerTwo)) {
+            double SECONDARY_ATTACK_REDUCTION = 0.75;
+            playersTwoDefencePoints = getSecondPlayersDefence(playerTwo);
+            int attackPower = (int) (playerOne.getAttack() * SECONDARY_ATTACK_REDUCTION);
+            attackPower = checkSecondaryTypes(playerOne, playerTwo, attackPower);
+            attackPower = attackPower - playersTwoDefencePoints;
+            if (attackPower > 0) playerTwo.setHealth(playerTwo.getHealth() - attackPower);
+        }
     }
 
     private int checkSecondaryTypes(Pet playerOne, Pet playerTwo, int power) {
@@ -63,6 +72,23 @@ public class Pet {
         } else {
             return power;
         }
+    }
+
+    private int getSecondPlayersDefence(Pet player) {
+        if (player.getState().equals(Action.DEFEND)) {
+            // defending player has doubled his defence
+            return 2 * player.getDefence();
+        } else {
+            return player.getDefence();
+        }
+    }
+
+    private boolean checkIfEvaded(Pet playerOne, Pet playerTwo) {
+        double LOWER_LIMIT = 0.75;
+        double UPPER_LIMIT = 1.25;
+        Random rand = new Random();
+        return playerOne.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT))
+                - playerTwo.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT)) > 0;
     }
 
     public String getName() {
