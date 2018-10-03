@@ -11,9 +11,9 @@ import java.util.Random;
 @Entity
 @Table(name = "pets")
 public class Pet {
-    public Pet(){
+    /*public Pet(){
 
-    }
+    }*/
 
     @Id
     @GeneratedValue
@@ -31,10 +31,10 @@ public class Pet {
     @Column(name = "speed")
     private int speed;
     @Column(name = "health")
-    private double health;
-    private Action state;
+    private int health;
+   /* private Action state;*/
 
-    private final double WEAKER_ATTACK = 0.75;
+   /* private final double WEAKER_ATTACK = 0.75;
     private final double STRONGER_ATTACK = 1.25;
 
     private int playersTwoDefencePoints;
@@ -111,7 +111,7 @@ public class Pet {
             return false;
         }
     }
-
+*/
     public String getName() {
         return name;
     }
@@ -152,14 +152,14 @@ public class Pet {
         this.speed = speed;
     }
 
-    public double getHealth() {
+    public int getHealth() {
         return health;
     }
 
-    public void setHealth(double health) {
+    public void setHealth(int health) {
         this.health = health;
     }
-
+/*
     public Action getState() {
         return state;
     }
@@ -174,5 +174,5 @@ public class Pet {
 
     public void setPlayersTwoDefencePoints(int playersTwoDefencePoints) {
         this.playersTwoDefencePoints = playersTwoDefencePoints;
-    }
+    }*/
 }
