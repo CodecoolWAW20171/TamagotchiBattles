@@ -1,69 +1,27 @@
 package com.codecool.tamagotchi.model.tamagotchi;
 
-import com.codecool.tamagotchi.model.tamagotchi.classes.Fire;
-import com.codecool.tamagotchi.model.tamagotchi.classes.Earth;
-import com.codecool.tamagotchi.model.tamagotchi.classes.Water;
-import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
+import javax.persistence.*;
 
-import java.lang.reflect.WildcardType;
-
+@Entity
+@Table(name = "pets")
 public class Pet {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "name")
     private String name;
+    @Column(name = "exp")
     private int exp = 0;
+    @Column(name = "attack")
     private int attack;
+    @Column(name = "defence")
     private int defence;
+    @Column(name = "speed")
     private int speed;
-    private double health = 100;
-    private Action state;
-
-    private double WEAKER_ATTACK = 0.75;
-    private double STRONGER_ATTACK = 1.25;
-
-    public Pet(String name, int attack, int defence, int speed) {
-        this.name = name;
-        this.attack = attack;
-        this.defence = defence;
-        this.speed = speed;
-    }
-
-    public void primaryAttack(Pet playerOne, Pet playerTwo) {
-        int attackPower = playerOne.getAttack();
-        attackPower = checkPrimaryTypes(playerOne, playerTwo, attackPower);
-        attackPower = attackPower - playerTwo.getDefence();
-        playerTwo.setHealth(playerTwo.getHealth() - attackPower);
-    }
-
-    private int checkPrimaryTypes(Pet playerOne, Pet playerTwo, int power) {
-        if (playerOne.getClass() == playerTwo.getClass()) {
-            return power;
-        } if (playerOne instanceof Fire && playerTwo instanceof Water
-                || playerOne instanceof Water && playerTwo instanceof Earth
-                || playerOne instanceof Earth && playerTwo instanceof Fire) {
-            return (int) (power * WEAKER_ATTACK);
-        } else {
-            return (int) (power * STRONGER_ATTACK);
-        }
-    }
-
-    public void secondaryAttack(Pet playerOne, Pet playerTwo) {
-        double SECONDARY_ATTACK_REDUCTION = 0.75;
-        int attackPower = (int) (playerOne.getAttack() * SECONDARY_ATTACK_REDUCTION);
-        attackPower = checkSecondaryTypes(playerOne, playerTwo, attackPower);
-        attackPower = attackPower - playerTwo.getDefence();
-        playerTwo.setHealth(playerTwo.getHealth() - attackPower);
-    }
-
-    private int checkSecondaryTypes(Pet playerOne, Pet playerTwo, int power) {
-        if (playerOne.getClass() == playerTwo.getClass()) {
-            return (int) (power * WEAKER_ATTACK);
-        } if (playerOne instanceof Fire && playerTwo instanceof Water
-                || playerOne instanceof Water && playerTwo instanceof Earth
-                || playerOne instanceof Earth && playerTwo instanceof Fire) {
-            return (int) (power * STRONGER_ATTACK);
-        } else {
-            return power;
-        }
-    }
+    @Column(name = "health")
+    private double health;
 
     public String getName() {
         return name;
@@ -111,13 +69,5 @@ public class Pet {
 
     public void setHealth(double health) {
         this.health = health;
-    }
-
-    public Action getState() {
-        return state;
-    }
-
-    public void setState(Action state) {
-        this.state = state;
     }
 }
