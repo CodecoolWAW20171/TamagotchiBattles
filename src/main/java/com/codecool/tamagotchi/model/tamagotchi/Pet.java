@@ -28,13 +28,13 @@ public class Pet {
         this.speed = speed;
     }
 
-    public void primaryAttack(Pet playerOne, Pet playerTwo) {
-        if (!checkIfEvaded(playerOne, playerTwo)) {
-            int attackPower = playerOne.getAttack();
-            setPlayersTwoDefencePoints(getSecondPlayersDefence(playerTwo));
-            attackPower = checkPrimaryTypes(playerOne, playerTwo, attackPower);
+    public void primaryAttack(Pet player) {
+        if (!checkIfEvaded(this, player)) {
+            int attackPower = this.getAttack();
+            setPlayersTwoDefencePoints(getSecondPlayersDefence(player));
+            attackPower = checkPrimaryTypes(this, player, attackPower);
             attackPower = attackPower - getPlayersTwoDefencePoints();
-            if (attackPower > 0) playerTwo.setHealth(playerTwo.getHealth() - attackPower);
+            if (attackPower > 0) player.setHealth(player.getHealth() - attackPower);
         }
     }
 
@@ -50,14 +50,14 @@ public class Pet {
         }
     }
 
-    public void secondaryAttack(Pet playerOne, Pet playerTwo) {
-        if (!checkIfEvaded(playerOne, playerTwo)) {
+    public void secondaryAttack(Pet player) {
+        if (!checkIfEvaded(this, player)) {
             double SECONDARY_ATTACK_REDUCTION = 0.75;
-            setPlayersTwoDefencePoints(getSecondPlayersDefence(playerTwo));
-            int attackPower = (int) (playerOne.getAttack() * SECONDARY_ATTACK_REDUCTION);
-            attackPower = checkSecondaryTypes(playerOne, playerTwo, attackPower);
+            setPlayersTwoDefencePoints(getSecondPlayersDefence(player));
+            int attackPower = (int) (this.getAttack() * SECONDARY_ATTACK_REDUCTION);
+            attackPower = checkSecondaryTypes(this, player, attackPower);
             attackPower = attackPower - getPlayersTwoDefencePoints();
-            if (attackPower > 0) playerTwo.setHealth(playerTwo.getHealth() - attackPower);
+            if (attackPower > 0) player.setHealth(player.getHealth() - attackPower);
         }
     }
 

@@ -2,6 +2,8 @@ package com.codecool.tamagotchi.model.tamagotchi;
 
 import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
 
+import java.util.Random;
+
 public class Battle {
     private Pet firstPlayer;
     private Pet secondPlayer;
@@ -19,22 +21,33 @@ public class Battle {
         setFirstPlayerHealthAtStartOfTurn(getFirstPlayer().getHealth());
         setSecondPlayerHealthAtStartOfTurn(getSecondPlayer().getHealth());
         if (getFirstPlayer().getSpeed() > getSecondPlayer().getSpeed()) {
-            makeAMove(getFirstPlayer(), getSecondPlayer());
-        } else {
-            makeAMove(getSecondPlayer(), getFirstPlayer());
-        }
+            moveFirstPlayerFirst();
+        } else if (getFirstPlayer().getSpeed() == getSecondPlayer().getSpeed()){
+            Random rand = new Random();
+            //If both players have the same speed, pick one to move first at random, using nextDouble
+            //To give them both 50% chance, we use 0,5 as parameter
+            if (rand.nextDouble() > 0.5) moveFirstPlayerFirst(); else moveSecondPlayerFirst();
+        } else moveSecondPlayerFirst();
+    }
+
+    private void moveFirstPlayerFirst() {
+        makeAMove(getFirstPlayer(), getSecondPlayer());
+    }
+
+    private void moveSecondPlayerFirst() {
+        makeAMove(getSecondPlayer(), getFirstPlayer());
     }
 
     public void makeAMove(Pet playerOne, Pet playerTwo) {
         if (checkPrimaryAttack(playerOne)) {
-            playerOne.primaryAttack(playerOne, playerTwo);
+            playerOne.primaryAttack(playerTwo);
         } else if (checkSecondaryAttack(playerOne)) {
-            playerOne.secondaryAttack(playerOne, playerTwo);
+            playerOne.secondaryAttack(playerTwo);
         } if (!checkIfWon(playerOne)) {
             if (checkPrimaryAttack(playerTwo)) {
-                playerTwo.primaryAttack(playerTwo, playerOne);
+                playerTwo.primaryAttack(playerOne);
             } else if (checkSecondaryAttack(playerTwo)) {
-                playerTwo.secondaryAttack(playerTwo, playerOne);
+                playerTwo.secondaryAttack(playerOne);
             }
             if (checkIfWon(playerTwo)) {
                 playerTwo.setExp((int) (playerTwo.getExp() + playerTwo.getHealth()));
