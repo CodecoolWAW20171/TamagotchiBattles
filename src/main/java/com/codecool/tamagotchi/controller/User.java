@@ -11,7 +11,12 @@ public class User {
 
     @RequestMapping("/user")
     public Object user(OAuth2Authentication authentication) {
-        LinkedHashMap<String, Object> properties = (LinkedHashMap<String, Object>) authentication.getUserAuthentication().getDetails();
-        return properties.get("name");
+        if (authentication != null) {
+                LinkedHashMap<String, Object> properties =
+                        (LinkedHashMap<String, Object>) authentication.getUserAuthentication().getDetails();
+
+                return properties.get("name");
+        }
+        return null;
     }
 }
