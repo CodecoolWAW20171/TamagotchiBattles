@@ -17,7 +17,8 @@ public class TamagotchiApplication extends WebSecurityConfigurerAdapter {
                 .antMatcher("/**").authorizeRequests()
                 .antMatchers("/").permitAll()
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll()
-                .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+                .and().csrf().disable().authorizeRequests().anyRequest().permitAll();
+                //csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }
 
     public static void main(String[] args) {

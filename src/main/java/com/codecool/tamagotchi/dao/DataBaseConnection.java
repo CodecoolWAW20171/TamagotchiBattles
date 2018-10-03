@@ -1,8 +1,10 @@
 package com.codecool.tamagotchi.dao;
 
+import com.codecool.tamagotchi.model.Pet;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import java.util.List;
@@ -25,11 +27,16 @@ public class DataBaseConnection {
     public void connectDB() {
         System.out.println("Connection to db" + sessionFactory.openSession());
         setSession(sessionFactory.openSession());
-
     }
 
     public List runQuery(String query) {
         return getSession().createQuery(query).list();
+    }
+
+    public void insertQuery(Object o) {
+        Transaction transaction = session.beginTransaction();
+        session.save(o);
+        transaction.commit();
     }
 
     public void disconnectDB() {

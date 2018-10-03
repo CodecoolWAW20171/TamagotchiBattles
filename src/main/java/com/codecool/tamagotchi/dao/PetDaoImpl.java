@@ -17,10 +17,11 @@ public class PetDaoImpl implements PetDao {
     private Action state;
 
     DataBaseConnection dataBaseConnection;
+    List<Pet> stringList;
 
     @Override
     public List<Pet> selectAllPets() {
-        List<Pet> stringList = new ArrayList<>();
+        stringList = new ArrayList<>();
 
         dataBaseConnection = new DataBaseConnection();
         dataBaseConnection.connectDB();
@@ -28,6 +29,15 @@ public class PetDaoImpl implements PetDao {
             stringList.add((Pet)pet);
         }
         return stringList;
+    }
+
+    @Override
+    public int addNewPet(Pet pet) {
+        dataBaseConnection = new DataBaseConnection();
+        dataBaseConnection.connectDB();
+        dataBaseConnection.insertQuery(pet);
+        dataBaseConnection.disconnectDB();
+        return 1;
     }
 
     @Override

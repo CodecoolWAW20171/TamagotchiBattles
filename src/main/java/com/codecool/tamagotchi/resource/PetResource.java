@@ -4,9 +4,7 @@ import com.codecool.tamagotchi.model.Pet;
 import com.codecool.tamagotchi.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +25,13 @@ public class PetResource {
     )
     private List<Pet> getAllPets() {
         return petService.getAllPets();
+    }
+
+    @RequestMapping(
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    private void addNewPet(@RequestBody Pet pet) {
+        petService.addNewPet(pet);
     }
 }
