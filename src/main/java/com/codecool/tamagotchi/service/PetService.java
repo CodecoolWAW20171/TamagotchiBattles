@@ -1,7 +1,7 @@
 package com.codecool.tamagotchi.service;
 
 import com.codecool.tamagotchi.dao.PetDao;
-import com.codecool.tamagotchi.model.tamagotchi.Pet;
+import com.codecool.tamagotchi.model.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

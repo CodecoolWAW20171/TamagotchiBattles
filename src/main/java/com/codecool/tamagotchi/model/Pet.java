@@ -1,12 +1,6 @@
-package com.codecool.tamagotchi.model.tamagotchi;
-
-import com.codecool.tamagotchi.model.tamagotchi.classes.Earth;
-import com.codecool.tamagotchi.model.tamagotchi.classes.Fire;
-import com.codecool.tamagotchi.model.tamagotchi.classes.Water;
-import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
+package com.codecool.tamagotchi.model;
 
 import javax.persistence.*;
-import java.util.Random;
 
 @Entity
 @Table(name = "pets")

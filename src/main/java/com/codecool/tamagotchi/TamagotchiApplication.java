@@ -11,19 +11,17 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 @EnableOAuth2Sso
 public class TamagotchiApplication extends WebSecurityConfigurerAdapter {
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http
-				.antMatcher("/**")
-				.authorizeRequests()
-					.antMatchers("/", "/login**", "/webjars/**", "/error**")
-					.permitAll()
-				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll()
-				.and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-	}
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .antMatcher("/**").authorizeRequests()
+                .antMatchers("/").permitAll()
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll()
+                .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(TamagotchiApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TamagotchiApplication.class, args);
+    }
 
 }

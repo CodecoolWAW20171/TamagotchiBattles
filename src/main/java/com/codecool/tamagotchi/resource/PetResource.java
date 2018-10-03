@@ -1,6 +1,6 @@
 package com.codecool.tamagotchi.resource;
 
-import com.codecool.tamagotchi.model.tamagotchi.Pet;
+import com.codecool.tamagotchi.model.Pet;
 import com.codecool.tamagotchi.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

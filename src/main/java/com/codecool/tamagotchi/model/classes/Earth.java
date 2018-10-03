@@ -1,6 +1,6 @@
-package com.codecool.tamagotchi.model.tamagotchi.classes;
+package com.codecool.tamagotchi.model.classes;
 
-import com.codecool.tamagotchi.model.tamagotchi.Pet;
+import com.codecool.tamagotchi.model.Pet;
 
 public class Earth extends Pet {
 

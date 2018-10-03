@@ -1,8 +1,4 @@
-package com.codecool.tamagotchi.model.tamagotchi;
-
-import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
-
-import java.util.Random;
+package com.codecool.tamagotchi.model;
 
 public class Battle {
     private Pet firstPlayer;

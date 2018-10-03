@@ -1,10 +1,10 @@
 package com.codecool.tamagotchi.dao;
 
-import com.codecool.tamagotchi.model.tamagotchi.Pet;
-import com.codecool.tamagotchi.model.tamagotchi.classes.Earth;
-import com.codecool.tamagotchi.model.tamagotchi.classes.Fire;
-import com.codecool.tamagotchi.model.tamagotchi.classes.Water;
-import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
+import com.codecool.tamagotchi.model.Pet;
+import com.codecool.tamagotchi.model.classes.Earth;
+import com.codecool.tamagotchi.model.classes.Fire;
+import com.codecool.tamagotchi.model.classes.Water;
+import com.codecool.tamagotchi.model.enumerations.Action;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
