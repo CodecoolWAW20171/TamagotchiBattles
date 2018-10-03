@@ -1,13 +1,84 @@
 package com.codecool.tamagotchi.model.tamagotchi;
 
+import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
+
 public class Battle {
     private Pet firstPlayer;
     private Pet secondPlayer;
+    private double firstPlayerHealthAtStartOfTurn;
+    private double secondPlayerHealthAtStartOfTurn;
     private int turn = 1;
+    private String battleFinalString;
 
     public Battle(Pet firstPlayer, Pet secondPlayer) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
+    }
+
+    public void getOrder() {
+        setFirstPlayerHealthAtStartOfTurn(getFirstPlayer().getHealth());
+        setSecondPlayerHealthAtStartOfTurn(getSecondPlayer().getHealth());
+        if (getFirstPlayer().getSpeed() > getSecondPlayer().getSpeed()) {
+            makeAMove(getFirstPlayer(), getSecondPlayer());
+        } else {
+            makeAMove(getSecondPlayer(), getFirstPlayer());
+        }
+    }
+
+    public void makeAMove(Pet playerOne, Pet playerTwo) {
+        if (checkPrimaryAttack(playerOne)) {
+            playerOne.primaryAttack(playerOne, playerTwo);
+        } else if (checkSecondaryAttack(playerOne)) {
+            playerOne.secondaryAttack(playerOne, playerTwo);
+        } if (!checkIfWon(playerOne)) {
+            if (checkPrimaryAttack(playerTwo)) {
+                playerTwo.primaryAttack(playerTwo, playerOne);
+            } else if (checkSecondaryAttack(playerTwo)) {
+                playerTwo.secondaryAttack(playerTwo, playerOne);
+            }
+            if (checkIfWon(playerTwo)) {
+                playerTwo.setExp((int) (playerTwo.getExp() + playerTwo.getHealth()));
+                addWinningString(playerTwo);
+            } else {
+                getBattleResult();
+            }
+        } else {
+            playerOne.setExp((int) (playerOne.getExp() + playerOne.getHealth()));
+            getBattleResult();
+            addWinningString(playerOne);
+        }
+    }
+
+    public boolean checkPrimaryAttack(Pet player) {
+        return player.getState().equals(Action.ATTACK);
+    }
+
+    public boolean checkSecondaryAttack(Pet player) {
+        return player.getState().equals(Action.SECONDARY_ATTACK);
+    }
+
+    public void getBattleResult() {
+        double damageDealtToSecondPlayer = getSecondPlayerHealthAtStartOfTurn() - getSecondPlayer().getHealth();
+        double damageDealtToFirstPlayer = getFirstPlayerHealthAtStartOfTurn() - getFirstPlayer().getHealth();
+
+        String result = "In this turn " + getFirstPlayer().getName() + " has dealt " + damageDealtToSecondPlayer
+                + " damage, and " + getSecondPlayer().getName() + " has dealt " + damageDealtToFirstPlayer + " damage.";
+        setBattleFinalString(result);
+    }
+
+    public boolean checkIfWon(Pet player) {
+        return player.getHealth() <= 0;
+    }
+
+    public void addWinningString(Pet player) {
+        String result = "\n" + player.getName() + " has won!";
+        setBattleFinalString(getBattleFinalString() + result);
+    }
+
+    public String goThroughTurn() {
+        getOrder();
+        turn++;
+        return getBattleFinalString();
     }
 
     public String nextTurn() {
@@ -24,5 +95,29 @@ public class Battle {
 
     public Pet getSecondPlayer() {
         return secondPlayer;
+    }
+
+    public double getFirstPlayerHealthAtStartOfTurn() {
+        return firstPlayerHealthAtStartOfTurn;
+    }
+
+    public void setFirstPlayerHealthAtStartOfTurn(double firstPlayerHealthAtStartOfTurn) {
+        this.firstPlayerHealthAtStartOfTurn = firstPlayerHealthAtStartOfTurn;
+    }
+
+    public double getSecondPlayerHealthAtStartOfTurn() {
+        return secondPlayerHealthAtStartOfTurn;
+    }
+
+    public void setSecondPlayerHealthAtStartOfTurn(double secondPlayerHealthAtStartOfTurn) {
+        this.secondPlayerHealthAtStartOfTurn = secondPlayerHealthAtStartOfTurn;
+    }
+
+    public String getBattleFinalString() {
+        return battleFinalString;
+    }
+
+    public void setBattleFinalString(String battleFinalString) {
+        this.battleFinalString = battleFinalString;
     }
 }
