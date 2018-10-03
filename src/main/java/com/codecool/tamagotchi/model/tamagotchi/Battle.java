@@ -77,12 +77,12 @@ public class Battle {
 
     public String goThroughTurn() {
         getOrder();
-        turn++;
+        setTurn(getTurn() + 1);
         return getBattleFinalString();
     }
 
-    public String nextTurn() {
-        return "";
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 
     public int getTurn() {

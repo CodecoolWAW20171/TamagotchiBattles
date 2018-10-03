@@ -31,9 +31,9 @@ public class Pet {
     public void primaryAttack(Pet playerOne, Pet playerTwo) {
         if (!checkIfEvaded(playerOne, playerTwo)) {
             int attackPower = playerOne.getAttack();
-            playersTwoDefencePoints = getSecondPlayersDefence(playerTwo);
+            setPlayersTwoDefencePoints(getSecondPlayersDefence(playerTwo));
             attackPower = checkPrimaryTypes(playerOne, playerTwo, attackPower);
-            attackPower = attackPower - playersTwoDefencePoints;
+            attackPower = attackPower - getPlayersTwoDefencePoints();
             if (attackPower > 0) playerTwo.setHealth(playerTwo.getHealth() - attackPower);
         }
     }
@@ -53,10 +53,10 @@ public class Pet {
     public void secondaryAttack(Pet playerOne, Pet playerTwo) {
         if (!checkIfEvaded(playerOne, playerTwo)) {
             double SECONDARY_ATTACK_REDUCTION = 0.75;
-            playersTwoDefencePoints = getSecondPlayersDefence(playerTwo);
+            setPlayersTwoDefencePoints(getSecondPlayersDefence(playerTwo));
             int attackPower = (int) (playerOne.getAttack() * SECONDARY_ATTACK_REDUCTION);
             attackPower = checkSecondaryTypes(playerOne, playerTwo, attackPower);
-            attackPower = attackPower - playersTwoDefencePoints;
+            attackPower = attackPower - getPlayersTwoDefencePoints();
             if (attackPower > 0) playerTwo.setHealth(playerTwo.getHealth() - attackPower);
         }
     }
@@ -86,8 +86,12 @@ public class Pet {
         double LOWER_LIMIT = 0.75;
         double UPPER_LIMIT = 1.25;
         Random rand = new Random();
-        return playerOne.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT))
-                - playerTwo.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT)) > 0;
+        if (!playerOne.getState().equals(Action.EVADE)) {
+            return playerOne.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT))
+                    - playerTwo.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT)) > 0;
+        } else {
+            return false;
+        }
     }
 
     public String getName() {
@@ -144,5 +148,13 @@ public class Pet {
 
     public void setState(Action state) {
         this.state = state;
+    }
+
+    public int getPlayersTwoDefencePoints() {
+        return playersTwoDefencePoints;
+    }
+
+    public void setPlayersTwoDefencePoints(int playersTwoDefencePoints) {
+        this.playersTwoDefencePoints = playersTwoDefencePoints;
     }
 }
