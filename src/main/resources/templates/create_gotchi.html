@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Create Gotchi</title>
+</head>
+<body>
+    <h1>Create Gotchi</h1>
+    <form action="#" th:action="@{/create_gotchi}" th:object="${pet}" method="post">
+        <p>Name: <input type="text" th:field="*{name}" /></p>
+        <p>
+            <select th:field="*{primaryType}">
+                <option value="fire">Fire</option>
+                <option value="water">Water</option>
+                <option value="earth">Earth</option>
+            </select>
+        </p>
+        <p><input type="submit" value="Submit" /></p>
+    </form>
+</body>
+</html>
