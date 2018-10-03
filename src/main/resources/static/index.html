@@ -15,10 +15,10 @@
 <body>
     <h1>Tamagotchi battles</h1><br>
     <div class="container">
-        <div class="container unauthenticated">
-           With Facebook: <a href="/login">click here</a>
+        <div class="container unauthenticated" style="display:none;">
+           <a href="/login" class="btn btn-primary">Log in With Facebook</a>
         </div>
-        <div class="container authenticated">
+        <div class="container authenticated" style="display:none;">
             Logged in as: <span id="user"></span>
             <div>
                 <button onClick="logout()" class="btn btn-primary">Logout</button>
@@ -27,9 +27,15 @@
     </div>
     <script type="text/javascript">
         $.get("/user", function(data) {
-            $("#user").html(data);
-            $(".unauthenticated").hide();
-            $(".authenticated").show();
+            if(data !== "") {
+                $("#user").html(data);
+                $(".authenticated").show();
+                $(".unauthenticated").hide();
+            }
+            else {
+                $(".authenticated").hide();
+                $(".unauthenticated").show();
+            }
         });
 
         var logout = function() {
