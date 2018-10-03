@@ -77,6 +77,7 @@ public class Battle {
 
     public String goThroughTurn() {
         getOrder();
+        //Increase turn by one
         setTurn(getTurn() + 1);
         return getBattleFinalString();
     }
