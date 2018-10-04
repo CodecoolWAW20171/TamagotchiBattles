@@ -47,7 +47,7 @@ public class Pet {
         }
     }
 
-    public void secondaryAttack(Pet player) {
+    void secondaryAttack(Pet player) {
         if (checkIfEvaded(player)) {
             double SECONDARY_ATTACK_REDUCTION = 0.75;
             setPlayersTwoDefencePoints(getSecondPlayersDefence(player));
