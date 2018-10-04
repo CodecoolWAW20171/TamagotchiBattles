@@ -1,13 +1,8 @@
 package com.codecool.tamagotchi.model.tamagotchi;
 
-import com.codecool.tamagotchi.model.tamagotchi.classes.Fire;
-import com.codecool.tamagotchi.model.tamagotchi.classes.Earth;
-import com.codecool.tamagotchi.model.tamagotchi.classes.Water;
 import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
 import com.codecool.tamagotchi.model.tamagotchi.enumerations.Type;
-
 import javax.validation.constraints.NotNull;
-
 import java.util.Random;
 
 public class Pet {
@@ -38,21 +33,21 @@ public class Pet {
     }
 
     public void primaryAttack(Pet player) {
-        if (!checkIfEvaded(this, player)) {
+        if (checkIfEvaded(player)) {
             int attackPower = this.getAttack();
             setPlayersTwoDefencePoints(getSecondPlayersDefence(player));
-            attackPower = checkPrimaryTypes(this, player, attackPower);
+            attackPower = checkPrimaryTypes(player, attackPower);
             attackPower = attackPower - getPlayersTwoDefencePoints();
             if (attackPower > 0) player.setHealth(player.getHealth() - attackPower);
         }
     }
 
-    private int checkPrimaryTypes(Pet playerOne, Pet playerTwo, int power) {
-        if (playerOne.getType().equals(playerTwo.getType())) {
+    private int checkPrimaryTypes(Pet player, int power) {
+        if (this.getType().equals(player.getType())) {
             return power;
-        } if (Type.FIRE.equals(playerOne.getType()) && Type.WATER.equals(playerTwo.getType())
-                || Type.WATER.equals(playerOne.getType()) && Type.EARTH.equals(playerTwo.getType())
-                || Type.EARTH.equals(playerOne.getType()) && Type.FIRE.equals(playerTwo.getType())) {
+        } if (Type.FIRE.equals(this.getType()) && Type.WATER.equals(player.getType())
+                || Type.WATER.equals(this.getType()) && Type.EARTH.equals(player.getType())
+                || Type.EARTH.equals(this.getType()) && Type.FIRE.equals(player.getType())) {
             return (int) (power * WEAKER_ATTACK);
         } else {
             return (int) (power * STRONGER_ATTACK);
@@ -60,22 +55,22 @@ public class Pet {
     }
 
     public void secondaryAttack(Pet player) {
-        if (!checkIfEvaded(this, player)) {
+        if (checkIfEvaded(player)) {
             double SECONDARY_ATTACK_REDUCTION = 0.75;
             setPlayersTwoDefencePoints(getSecondPlayersDefence(player));
             int attackPower = (int) (this.getAttack() * SECONDARY_ATTACK_REDUCTION);
-            attackPower = checkSecondaryTypes(this, player, attackPower);
+            attackPower = checkSecondaryTypes(player, attackPower);
             attackPower = attackPower - getPlayersTwoDefencePoints();
             if (attackPower > 0) player.setHealth(player.getHealth() - attackPower);
         }
     }
 
-    private int checkSecondaryTypes(Pet playerOne, Pet playerTwo, int power) {
-        if (playerOne.getClass() == playerTwo.getClass()) {
+    private int checkSecondaryTypes(Pet player, int power) {
+        if (this.getClass() == player.getClass()) {
             return (int) (power * WEAKER_ATTACK);
-        } if (Type.FIRE.equals(playerOne.getType()) && Type.WATER.equals(playerTwo.getType())
-                || Type.WATER.equals(playerOne.getType()) && Type.EARTH.equals(playerTwo.getType())
-                || Type.EARTH.equals(playerOne.getType()) && Type.FIRE.equals(playerTwo.getType())) {
+        } if (Type.FIRE.equals(this.getType()) && Type.WATER.equals(player.getType())
+                || Type.WATER.equals(this.getType()) && Type.EARTH.equals(player.getType())
+                || Type.EARTH.equals(this.getType()) && Type.FIRE.equals(player.getType())) {
             return (int) (power * STRONGER_ATTACK);
         } else {
             return power;
@@ -91,16 +86,15 @@ public class Pet {
         }
     }
 
-    private boolean checkIfEvaded(Pet playerOne, Pet playerTwo) {
+    private boolean checkIfEvaded(Pet player) {
         double LOWER_LIMIT = 0.75;
         double UPPER_LIMIT = 1.25;
         Random rand = new Random();
-        if (!playerOne.getState().equals(Action.EVADE)) {
-            return playerOne.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT))
-                    - playerTwo.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT)) > 0;
-        } else {
-            return false;
+        if (!this.getState().equals(Action.EVADE)) {
+            return !(this.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT))
+                    - player.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT)) > 0);
         }
+        return true;
     }
 
     public String getName() {
