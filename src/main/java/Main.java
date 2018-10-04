@@ -1,59 +1,45 @@
-import com.codecool.tamagotchi.dao.DataBaseConnection;
+import com.codecool.tamagotchi.dao.BattleDao;
+import com.codecool.tamagotchi.dao.BattleDaoImpl;
 import com.codecool.tamagotchi.model.tamagotchi.Pet;
+import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
+import com.codecool.tamagotchi.model.tamagotchi.enumerations.Type;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class Main {
-    private static final SessionFactory ourSessionFactory;
-
-    static {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-
-            ourSessionFactory = configuration.buildSessionFactory();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
-    }
 
     public static void main(final String[] args) throws Exception {
+        Pet playerOne = new Pet();
+        playerOne.setName("Player 1");
+        playerOne.setHealth(100);
+        playerOne.setAttack(60);
+        playerOne.setDefence(60);
+        playerOne.setSpeed(80);
+        playerOne.setType(Type.EARTH);
+        playerOne.setState(Action.ATTACK);
 
-        DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        Pet playerTwo = new Pet();
+        playerTwo.setName("Player 2");
+        playerTwo.setHealth(100);
+        playerTwo.setAttack(60);
+        playerTwo.setDefence(60);
+        playerTwo.setSpeed(80);
+        playerTwo.setType(Type.FIRE);
+        playerTwo.setState(Action.SECONDARY_ATTACK);
 
-        dataBaseConnection.connectDB();
-        for (Object pet : dataBaseConnection.runQuery("from Pet")) {
-            System.out.println(((Pet)pet).getName());
-        }
+        BattleDaoImpl battle = new BattleDaoImpl(playerOne, playerTwo);
+        System.out.println(battle);
+        System.out.println(battle.checkIfEvaded());
+        System.out.println(battle.getSecondPlayersDefence(playerOne));
+        System.out.println(battle.getSecondPlayersDefence(playerTwo));
+        System.out.println(battle.checkPrimaryTypes(10));
+        System.out.println(battle.checkSecondaryTypes(10));
+        battle.primaryAttack(playerOne);
+        battle.primaryAttack(playerTwo);
+        battle.secondaryAttack(playerOne);
+        battle.secondaryAttack(playerTwo);
 
-        dataBaseConnection.disconnectDB();
-        /*final Session session = getSession();
-        try {
-            System.out.println("querying all the managed entities...");
-            String hql = "FROM Pet";
-            Query query = session.createQuery(hql);
-            List<Pet> results = query.list();
-            System.out.println("Coś z bazy danych: " + results);
-            for (Pet pet: results) {
-                System.out.println(pet.getName());
-            }
-            *//* final Metamodel metamodel = session.getSessionFactory().getMetamodel();
-            for (EntityType<?> entityType : metamodel.getEntities()) {
-                final String entityName = "pet"; //entityType.getName();
-                final Query query = session.createQuery("from " + entityName);
-                System.out.println("executing: " + query.getQueryString());
-                for (Object o : query.list()) {
-                    System.out.println("  " + o);
-                }
-            }*//*
-        } finally {
-            session.close();
-        }*/
     }
 }
