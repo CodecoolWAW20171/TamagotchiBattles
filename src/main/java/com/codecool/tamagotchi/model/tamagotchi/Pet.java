@@ -25,13 +25,6 @@ public class Pet {
 
     private int playersTwoDefencePoints;
 
-    public Pet(String name, int attack, int defence, int speed) {
-        this.name = name;
-        this.attack = attack;
-        this.defence = defence;
-        this.speed = speed;
-    }
-
     public void primaryAttack(Pet player) {
         if (checkIfEvaded(player)) {
             int attackPower = this.getAttack();
