@@ -1,13 +1,14 @@
-package com.codecool.tamagotchi.model;
+package com.codecool.tamagotchi.model.tamagotchi;
+
+import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
+import com.codecool.tamagotchi.model.tamagotchi.enumerations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "pets")
 public class Pet {
-    /*public Pet(){
-
-    }*/
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -15,18 +16,34 @@ public class Pet {
     private int id;
 
     @Column(name = "name")
+    @NotNull
     private String name;
+
     @Column(name = "exp")
+    @NotNull
     private int exp = 0;
+
     @Column(name = "attack")
+    @NotNull
     private int attack;
+
     @Column(name = "defence")
+    @NotNull
     private int defence;
+
     @Column(name = "speed")
+    @NotNull
     private int speed;
+
+    @NotNull
+    @Column(name = "type")
+    private Type type;
+
+    @NotNull
     @Column(name = "health")
     private int health;
-   /* private Action state;*/
+    @Column(name = "state")
+    private Action state;
 
    /* private final double WEAKER_ATTACK = 0.75;
     private final double STRONGER_ATTACK = 1.25;
@@ -153,7 +170,6 @@ public class Pet {
     public void setHealth(int health) {
         this.health = health;
     }
-/*
     public Action getState() {
         return state;
     }
@@ -162,11 +178,23 @@ public class Pet {
         this.state = state;
     }
 
-    public int getPlayersTwoDefencePoints() {
-        return playersTwoDefencePoints;
+    public Type getType() {
+        return type;
     }
 
-    public void setPlayersTwoDefencePoints(int playersTwoDefencePoints) {
-        this.playersTwoDefencePoints = playersTwoDefencePoints;
-    }*/
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return  "name: " + name + "\n" +
+                "type: " + type + "\n" +
+                "exp: " + exp + "\n" +
+                "attack: " + attack + "\n" +
+                "defence: " + defence + "\n" +
+                "speed: " + speed + "\n" +
+                "health: " + health + "\n" +
+                "state: " + state + "\n";
+    }
 }

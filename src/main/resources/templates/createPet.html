@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pet creator</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Form</h1>
+<form action="#" th:action="@{/createPet}" th:object="${pet}" method="post">
+    <p>Name: <input type="text" th:field="*{name}" required /></p>
+    <select name="type" th:field="*{type}" class="form-control" id="type" required>
+        <option class = "description" value="" disabled selected hidden>Choose type attack</option>
+        <option th:each="primary : ${T(com.codecool.tamagotchi.model.tamagotchi.enumerations.Type).values()}"
+                th:value="${primary}"
+                th:text="${primary}"
+                th:class="${primary.groupType}">
+        </option>
+
+    </select>
+    <p>Attack: <input type="text" th:field="*{attack}" required /></p>
+    <p>Defence: <input type="text" th:field="*{defence}" required /></p>
+    <p>Speed: <input type="text" th:field="*{speed}" required /></p>
+    <p><input type="submit" value="Submit" /></p>
+</form>
+</body>
+</html>

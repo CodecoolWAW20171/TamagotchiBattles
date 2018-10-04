@@ -1,4 +1,4 @@
-package com.codecool.tamagotchi.model.enumerations;
+package com.codecool.tamagotchi.model.tamagotchi.enumerations;
 
 public enum Action {
     ATTACK,

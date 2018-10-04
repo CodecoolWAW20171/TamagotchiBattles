@@ -1,5 +1,7 @@
 package com.codecool.tamagotchi.model;
 
+import com.codecool.tamagotchi.model.tamagotchi.Pet;
+
 public class Battle {
     private Pet firstPlayer;
     private Pet secondPlayer;

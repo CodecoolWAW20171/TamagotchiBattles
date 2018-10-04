@@ -1,6 +1,6 @@
-package com.codecool.tamagotchi.model.classes;
+package com.codecool.tamagotchi.model.tamagotchi.classes;
 
-import com.codecool.tamagotchi.model.Pet;
+import com.codecool.tamagotchi.model.tamagotchi.Pet;
 
 public class Fire extends Pet {
 

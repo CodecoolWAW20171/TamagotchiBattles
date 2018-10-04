@@ -1,5 +1,5 @@
-import com.codecool.tamagotchi.model.Pet;
 import com.codecool.tamagotchi.dao.DataBaseConnection;
+import com.codecool.tamagotchi.model.tamagotchi.Pet;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

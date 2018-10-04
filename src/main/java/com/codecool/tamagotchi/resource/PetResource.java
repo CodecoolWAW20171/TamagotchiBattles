@@ -1,6 +1,6 @@
 package com.codecool.tamagotchi.resource;
 
-import com.codecool.tamagotchi.model.Pet;
+import com.codecool.tamagotchi.model.tamagotchi.Pet;
 import com.codecool.tamagotchi.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,11 +27,11 @@ public class PetResource {
         return petService.getAllPets();
     }
 
-    @RequestMapping(
+    /*@RequestMapping(
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private void addNewPet(@RequestBody Pet pet) {
-        petService.addNewPet(pet);
-    }
+    private void createPet(@RequestBody Pet pet) {
+        petService.createPet(pet);
+    }*/
 }

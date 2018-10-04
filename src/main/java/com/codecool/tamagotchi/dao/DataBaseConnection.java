@@ -1,6 +1,5 @@
 package com.codecool.tamagotchi.dao;
 
-import com.codecool.tamagotchi.model.Pet;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
