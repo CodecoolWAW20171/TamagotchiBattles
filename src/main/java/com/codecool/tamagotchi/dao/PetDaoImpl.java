@@ -26,6 +26,7 @@ public class PetDaoImpl implements PetDao {
         for (Object pet : dataBaseConnection.runQuery("from Pet")) {
             stringList.add((Pet)pet);
         }
+        dataBaseConnection.disconnectDB();
         return stringList;
     }
 

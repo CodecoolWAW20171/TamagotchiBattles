@@ -41,7 +41,8 @@ public class Pet {
 
     @NotNull
     @Column(name = "health")
-    private int health;
+    private int health = 100;
+
     @Column(name = "state")
     private Action state;
 

@@ -21,3 +21,5 @@ CREATE UNIQUE INDEX pets_id_uindex ON public.pets (id);
 insert into pets (name, exp, attack, defence, speed, health, state, type) values ('pet3', 0, 30, 30, 30, 40, 'state', 'type');
 
 select * from pets;
+
+delete from pets where id = 1;
