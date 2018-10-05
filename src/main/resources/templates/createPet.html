@@ -3,7 +3,8 @@
 <head>
     <title>Pet creator</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <script src="../static/createGotchiPointsDistribution.js" type="application/javascript"></script>
+    <script src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
+    <script src="createGotchiPointsDistribution.js" type="application/javascript"></script>
 </head>
 <body>
 <h1>Form</h1>
@@ -19,9 +20,9 @@
 
     </select>
     <p>You have <span id="points-left">200</span> points left</p>
-    <p>Attack: <input id="attack-input" type="text" th:field="*{attack}" required /></p>
-    <p>Defence: <input id="defence-input" type="text" th:field="*{defence}" required /></p>
-    <p>Speed: <input id="speed-input" type="text" th:field="*{speed}" required /></p>
+    <p>Attack: <input id="attack-input" type="number" th:field="*{attack}" required /></p>
+    <p>Defence: <input id="defence-input" type="number" th:field="*{defence}" required /></p>
+    <p>Speed: <input id="speed-input" type="number" th:field="*{speed}" required /></p>
     <p><input id="submit-button" type="submit" value="Submit" /></p>
 </form>
 </body>
