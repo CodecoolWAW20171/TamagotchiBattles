@@ -1,4 +1,4 @@
-package com.codecool.tamagotchi.controller;
+package com.codecool.tamagotchi.user;
 
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.RequestMapping;

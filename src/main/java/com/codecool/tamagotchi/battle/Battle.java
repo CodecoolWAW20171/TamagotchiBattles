@@ -1,6 +1,7 @@
-package com.codecool.tamagotchi.model.tamagotchi;
+package com.codecool.tamagotchi.battle;
 
-import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
+import com.codecool.tamagotchi.pet.Pet;
+import com.codecool.tamagotchi.enumerations.Action;
 
 import java.util.Random;
 

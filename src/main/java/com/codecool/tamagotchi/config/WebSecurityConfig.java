@@ -14,12 +14,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .antMatcher("/**")
-                .authorizeRequests()
+                    .authorizeRequests()
                 .antMatchers("/", "/login**", "/webjars/**", "/error**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and().logout().logoutSuccessUrl("/").permitAll()
-                .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated()
+                .and().logout()
+                    .logoutSuccessUrl("/")
+                    .permitAll()
+                .and().csrf()
+                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }
 }

@@ -1,7 +1,7 @@
-package com.codecool.tamagotchi.model.tamagotchi;
+package com.codecool.tamagotchi.pet;
 
-import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
-import com.codecool.tamagotchi.model.tamagotchi.enumerations.Type;
+import com.codecool.tamagotchi.enumerations.Action;
+import com.codecool.tamagotchi.enumerations.Type;
 import javax.validation.constraints.NotNull;
 import java.util.Random;
 
@@ -46,7 +46,7 @@ public class Pet {
         }
     }
 
-    void secondaryAttack(Pet player) {
+    public void secondaryAttack(Pet player) {
         if (checkIfEvaded(player)) {
             double SECONDARY_ATTACK_REDUCTION = 0.75;
             setPlayersTwoDefencePoints(getSecondPlayersDefence(player));
