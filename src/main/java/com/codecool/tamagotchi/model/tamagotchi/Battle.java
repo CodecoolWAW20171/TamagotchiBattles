@@ -13,11 +13,6 @@ public class Battle {
     private int turn = 1;
     private String battleFinalString;
 
-    public Battle(Pet firstPlayer, Pet secondPlayer) {
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = secondPlayer;
-    }
-
     public void getOrder() {
         setFirstPlayerHealthAtStartOfTurn(getFirstPlayer().getHealth());
         setSecondPlayerHealthAtStartOfTurn(getSecondPlayer().getHealth());
@@ -102,6 +97,14 @@ public class Battle {
 
     public int getTurn() {
         return turn;
+    }
+
+    public void setFirstPlayer(Pet pet) {
+        firstPlayer = pet;
+    }
+
+    public void setSecondPlayer(Pet pet) {
+        secondPlayer = pet;
     }
 
     public Pet getFirstPlayer() {
