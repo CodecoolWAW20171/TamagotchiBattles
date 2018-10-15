@@ -1,9 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Getting Started: Handling Form Submission</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
+<header th:insert="fragments/general.html :: header"> </header>
 <body>
     <h1>Your pet:</h1>
     <p th:text="'Name: ' + ${pet.name}" />

@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Pet creator</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
+<th:block th:include="fragments/general.html :: header" xmlns:th="http://www.w3.org/1999/xhtml"></th:block>
 <h1>Form</h1>
 <form action="#" th:action="@{/createPet}" th:object="${pet}" method="post">
     <p>Name: <input type="text" th:field="*{name}" required /></p>
@@ -22,5 +16,3 @@
     <p>Speed: <input type="text" th:field="*{speed}" required /></p>
     <p><input type="submit" value="Submit" /></p>
 </form>
-</body>
-</html>
