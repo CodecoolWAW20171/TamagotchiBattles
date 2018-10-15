@@ -9,6 +9,7 @@ public class Battle {
     private Pet secondPlayer;
     private double firstPlayerHealthAtStartOfTurn;
     private double secondPlayerHealthAtStartOfTurn;
+    // Calculate turns for battle to view information in user friendly way, starting from 1
     private int turn = 1;
     private String battleFinalString;
 
