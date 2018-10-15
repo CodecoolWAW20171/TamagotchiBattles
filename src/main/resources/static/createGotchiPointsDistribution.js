@@ -1,10 +1,6 @@
-let pointsRemainingText = $("#points-left");
-
-let attack = $("#attack-input");
-let defence = $("#defence-input");
-let speed = $("#speed-input");
-
-let submitButton = $("#submit-button");
+let attack = document.getElementById("attack-input");
+let defence = document.getElementById("defence-input");
+let speed = document.getElementById("speed-input");
 
 attack.addEventListener("input", updateRemainingPoints);
 defence.addEventListener("input", updateRemainingPoints);
@@ -15,12 +11,16 @@ function updateRemainingPoints() {
     let defencePoints = Number(defence.value);
     let speedPoints = Number(speed.value);
     let pointsRemaining = 200 - attackPoints - defencePoints - speedPoints;
-    pointsRemainingText.innerText = pointsRemaining;
+    document.getElementById("points-left").innerText = pointsRemaining;
+
+    let isButtonDisabled;
 
     if (pointsRemaining < 0) {
-        submitButton.disabled = true;
+        isButtonDisabled = true;
     } else {
-        submitButton.disabled = false;
+        isButtonDisabled = false;
     }
+
+    document.getElementById("submit-button").disabled = isButtonDisabled;
 
 }
