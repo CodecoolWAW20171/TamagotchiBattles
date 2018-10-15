@@ -8,12 +8,12 @@
 </head>
 <body>
 <h1>Form</h1>
-<form action="#" th:action="@{/createPet}" th:object="${pet}" method="post">
+<form action="#" th:action="@{/room}" th:object="${pet}" method="post">
     <p>
         Type:
         <select name="type" th:field="*{type}" class="form-control" id="type" required>
             <option class = "description" value="" disabled selected hidden>Choose type attack</option>
-            <option th:each="primary : ${T(com.codecool.tamagotchi.model.tamagotchi.enumerations.Type).values()}"
+            <option th:each="primary : ${T(com.codecool.tamagotchi.enumerations.Type).values()}"
                     th:value="${primary}"
                     th:text="${primary}"
                     th:class="${primary.groupType}">
