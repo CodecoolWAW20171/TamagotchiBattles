@@ -6,7 +6,6 @@ import javax.validation.constraints.NotNull;
 import java.util.Random;
 
 public class Pet {
-    @NotNull
     private String name;
     @NotNull
     private int attack;

@@ -8,16 +8,18 @@
 <body>
 <h1>Form</h1>
 <form action="#" th:action="@{/createPet}" th:object="${pet}" method="post">
-    <p>Name: <input type="text" th:field="*{name}" required /></p>
-    <select name="type" th:field="*{type}" class="form-control" id="type" required>
-        <option class = "description" value="" disabled selected hidden>Choose type attack</option>
-        <option th:each="primary : ${T(com.codecool.tamagotchi.model.tamagotchi.enumerations.Type).values()}"
-                th:value="${primary}"
-                th:text="${primary}"
-                th:class="${primary.groupType}">
-        </option>
+    <p>
+        Type:
+        <select name="type" th:field="*{type}" class="form-control" id="type" required>
+            <option class = "description" value="" disabled selected hidden>Choose type attack</option>
+            <option th:each="primary : ${T(com.codecool.tamagotchi.model.tamagotchi.enumerations.Type).values()}"
+                    th:value="${primary}"
+                    th:text="${primary}"
+                    th:class="${primary.groupType}">
+            </option>
 
-    </select>
+        </select>
+    </p>
     <p>You have <span id="points-left">200</span> points left</p>
     <p>Attack: <input id="attack-input" type="text" th:field="*{attack}" required /></p>
     <p>Defence: <input id="defence-input" type="text" th:field="*{defence}" required /></p>
