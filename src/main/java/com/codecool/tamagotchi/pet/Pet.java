@@ -22,6 +22,7 @@ public class Pet {
     private final double REDUCTION_VALUE = 0.75;
     private final double UPGRADE_VALUE = 1.25;
 
+    // this variable is set in case second player is defending
     private int playersTwoDefencePoints;
 
     public void primaryAttack(Pet player) {
