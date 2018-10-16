@@ -9,7 +9,8 @@ CREATE TABLE public.pets
   attack int,
   defence int,
   speed int,
-  health int
+  health int,
+  type varchar(100)
 );
 CREATE UNIQUE INDEX pets_id_uindex ON public.pets (id);
 

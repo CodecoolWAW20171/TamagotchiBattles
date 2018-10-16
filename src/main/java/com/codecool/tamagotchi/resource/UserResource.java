@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 @RestController
 public class UserResource {
 
-    @RequestMapping("/user")
+    @RequestMapping("/user1")
     public Object user(OAuth2Authentication authentication) {
         if (authentication != null) {
                 LinkedHashMap<String, Object> properties =
