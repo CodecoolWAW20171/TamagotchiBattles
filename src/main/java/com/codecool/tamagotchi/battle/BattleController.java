@@ -29,8 +29,8 @@ public class BattleController {
     public BattleLog log(OAuth2Authentication authentication, String message) {
         String username = new UserController().user(authentication);
 
-        battle.setPlayerAction(username, message);
-        return new BattleLog(message);
+        String log = battle.setPlayerAction(username, message);
+        return new BattleLog(log);
     }
 
 

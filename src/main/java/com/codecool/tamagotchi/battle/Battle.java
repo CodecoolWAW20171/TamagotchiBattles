@@ -5,7 +5,7 @@ import com.codecool.tamagotchi.enumerations.Action;
 
 import java.util.Random;
 
-public class Battle {
+class Battle {
     private Pet firstPlayer;
     private Pet secondPlayer;
     private double firstPlayerHealthAtStartOfTurn;
@@ -14,9 +14,9 @@ public class Battle {
     private int turn = 1;
     private String battleFinalString;
 
-    public void getOrder() {
-        setFirstPlayerHealthAtStartOfTurn(getFirstPlayer().getHealth());
-        setSecondPlayerHealthAtStartOfTurn(getSecondPlayer().getHealth());
+    private void getOrder() {
+        firstPlayerHealthAtStartOfTurn = getFirstPlayer().getHealth();
+        secondPlayerHealthAtStartOfTurn = getSecondPlayer().getHealth();
         if (getFirstPlayer().getSpeed() > getSecondPlayer().getSpeed()) {
             moveFirstPlayerFirst();
         } else if (getFirstPlayer().getSpeed() == getSecondPlayer().getSpeed()){
@@ -35,7 +35,7 @@ public class Battle {
         makeAMove(getSecondPlayer(), getFirstPlayer());
     }
 
-    public void makeAMove(Pet playerOne, Pet playerTwo) {
+    private void makeAMove(Pet playerOne, Pet playerTwo) {
         if (checkPrimaryAttack(playerOne)) {
             playerOne.primaryAttack(playerTwo);
         } else if (checkSecondaryAttack(playerOne)) {
@@ -50,57 +50,51 @@ public class Battle {
                 playerTwo.setExp((int) (playerTwo.getExp() + playerTwo.getHealth()));
                 addWinningString(playerTwo);
             } else {
-                getBattleResult();
+                setBattleResult();
             }
         } else {
             playerOne.setExp((int) (playerOne.getExp() + playerOne.getHealth()));
-            getBattleResult();
+            setBattleResult();
             addWinningString(playerOne);
         }
     }
 
-    public boolean checkPrimaryAttack(Pet player) {
+    private boolean checkPrimaryAttack(Pet player) {
         return player.getState().equals(Action.ATTACK);
     }
 
-    public boolean checkSecondaryAttack(Pet player) {
+    private boolean checkSecondaryAttack(Pet player) {
         return player.getState().equals(Action.SECONDARY_ATTACK);
     }
 
-    public void getBattleResult() {
-        double damageDealtToSecondPlayer = getSecondPlayerHealthAtStartOfTurn() - getSecondPlayer().getHealth();
-        double damageDealtToFirstPlayer = getFirstPlayerHealthAtStartOfTurn() - getFirstPlayer().getHealth();
+    private void setBattleResult() {
+        double damageDealtToSecondPlayer = secondPlayerHealthAtStartOfTurn - getSecondPlayer().getHealth();
+        double damageDealtToFirstPlayer = firstPlayerHealthAtStartOfTurn - getFirstPlayer().getHealth();
 
-        String result = "In this turn " + getFirstPlayer().getName() + " has dealt " + damageDealtToSecondPlayer
-                + " damage, and " + getSecondPlayer().getName() + " has dealt " + damageDealtToFirstPlayer + " damage.";
-        setBattleFinalString(result);
+        battleFinalString = "Round " + turn + "\n" +
+                getFirstPlayer().getName() + " has dealt " + damageDealtToSecondPlayer+ " damage, and " +
+                getSecondPlayer().getName() + " has dealt " + damageDealtToFirstPlayer + " damage.";
     }
 
-    public boolean checkIfWon(Pet player) {
+    private boolean checkIfWon(Pet player) {
         return player.getHealth() <= 0;
     }
 
-    public void addWinningString(Pet player) {
+    private void addWinningString(Pet player) {
         String result = "\n" + player.getName() + " has won!";
-        setBattleFinalString(getBattleFinalString() + result);
+        battleFinalString = battleFinalString + result;
     }
 
-    public String goThroughTurn() {
+    private String goThroughTurn() {
         getOrder();
         //Increase turn by one
-        setTurn(getTurn() + 1);
-        return getBattleFinalString();
+        turn++;
+        firstPlayer.setState(null);
+        secondPlayer.setState(null);
+        return battleFinalString;
     }
 
-    public void setTurn(int turn) {
-        this.turn = turn;
-    }
-
-    public int getTurn() {
-        return turn;
-    }
-
-    public void addPlayer(Pet pet) {
+    void addPlayer(Pet pet) {
         if (firstPlayer == null) {
             firstPlayer = pet;
         } else if (secondPlayer == null) {
@@ -108,53 +102,29 @@ public class Battle {
         }
     }
 
-    public void setSecondPlayer(Pet pet) {
-        secondPlayer = pet;
-    }
-
-    public Pet getFirstPlayer() {
+    private Pet getFirstPlayer() {
         return firstPlayer;
     }
 
-    public Pet getSecondPlayer() {
+    private Pet getSecondPlayer() {
         return secondPlayer;
     }
 
-    public double getFirstPlayerHealthAtStartOfTurn() {
-        return firstPlayerHealthAtStartOfTurn;
-    }
-
-    public void setFirstPlayerHealthAtStartOfTurn(double firstPlayerHealthAtStartOfTurn) {
-        this.firstPlayerHealthAtStartOfTurn = firstPlayerHealthAtStartOfTurn;
-    }
-
-    public double getSecondPlayerHealthAtStartOfTurn() {
-        return secondPlayerHealthAtStartOfTurn;
-    }
-
-    public void setSecondPlayerHealthAtStartOfTurn(double secondPlayerHealthAtStartOfTurn) {
-        this.secondPlayerHealthAtStartOfTurn = secondPlayerHealthAtStartOfTurn;
-    }
-
-    public String getBattleFinalString() {
-        return battleFinalString;
-    }
-
-    public void setBattleFinalString(String battleFinalString) {
-        this.battleFinalString = battleFinalString;
-    }
-
-    public void setPlayerAction(String username, String message) {
+    String setPlayerAction(String username, String message) {
         Action action = setActionFromString(message);
 
-        if (firstPlayer != null)
-            if (username.equals(firstPlayer.getName())) {
-                this.getFirstPlayer().setState(action);
+        if (firstPlayer != null && secondPlayer != null) {
+            if (username.equals(firstPlayer.getName()))
+                firstPlayer.setState(action);
+            if (username.equals(secondPlayer.getName()))
+                secondPlayer.setState(action);
+
+            if (firstPlayer.getState() != null && secondPlayer.getState() != null) {
+                goThroughTurn();
+                return battleFinalString;
             }
-        if (secondPlayer != null)
-            if (username.equals(secondPlayer.getName())) {
-                this.getSecondPlayer().setState(action);
-            }
+        }
+        return username + " set up his action";
     }
 
     private Action setActionFromString(String action) {
