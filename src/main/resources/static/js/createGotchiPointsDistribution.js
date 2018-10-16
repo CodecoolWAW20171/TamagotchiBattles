@@ -15,7 +15,7 @@ function updateRemainingPoints() {
 
     let isButtonDisabled;
 
-    if (pointsRemaining < 0) {
+    if (pointsRemaining != 0) {
         isButtonDisabled = true;
     } else {
         isButtonDisabled = false;
