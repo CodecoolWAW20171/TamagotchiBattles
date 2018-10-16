@@ -82,8 +82,10 @@ public class Pet {
         double UPPER_LIMIT = UPGRADE_VALUE;
         Random rand = new Random();
         if (Action.EVADE.equals(player.getState())) {
-            return (this.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT))
-                    - player.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT)) > 0);
+            /* return true is one players speed multiplied by random value between given brackets 0.75 - 1.25 if faster
+             than the other */
+            return (player.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT))
+                    - this.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT)) > 0);
         }
         return false;
     }
