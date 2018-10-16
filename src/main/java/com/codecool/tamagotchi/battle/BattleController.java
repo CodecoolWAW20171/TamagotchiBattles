@@ -44,7 +44,7 @@ public class BattleController {
 
     @MessageMapping("/action")
     @SendTo("/battle/log")
-    public BattleLog log(String message) throws Exception {
+    public BattleLog log(String message) {
         return new BattleLog(message);
     }
 
