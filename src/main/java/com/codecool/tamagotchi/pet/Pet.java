@@ -19,8 +19,8 @@ public class Pet {
     private double health = 100;
     private Action state;
 
-    private final double WEAKER_ATTACK = 0.75;
-    private final double STRONGER_ATTACK = 1.25;
+    private final double REDUCTION_VALUE = 0.75;
+    private final double UPGRADE_VALUE = 1.25;
 
     private int playersTwoDefencePoints;
 
@@ -40,17 +40,16 @@ public class Pet {
         } if (Type.FIRE.equals(this.getType()) && Type.WATER.equals(player.getType())
                 || Type.WATER.equals(this.getType()) && Type.EARTH.equals(player.getType())
                 || Type.EARTH.equals(this.getType()) && Type.FIRE.equals(player.getType())) {
-            return (int) (power * WEAKER_ATTACK);
+            return (int) (power * REDUCTION_VALUE);
         } else {
-            return (int) (power * STRONGER_ATTACK);
+            return (int) (power * UPGRADE_VALUE);
         }
     }
 
     public void secondaryAttack(Pet player) {
         if (checkIfEvaded(player)) {
-            double SECONDARY_ATTACK_REDUCTION = 0.75;
             setPlayersTwoDefencePoints(getSecondPlayersDefence(player));
-            int attackPower = (int) (this.getAttack() * SECONDARY_ATTACK_REDUCTION);
+            int attackPower = (int) (this.getAttack() * REDUCTION_VALUE);
             attackPower = checkSecondaryTypes(player, attackPower);
             attackPower = attackPower - getPlayersTwoDefencePoints();
             if (attackPower > 0) player.setHealth(player.getHealth() - attackPower);
@@ -59,11 +58,11 @@ public class Pet {
 
     private int checkSecondaryTypes(Pet player, int power) {
         if (this.getClass() == player.getClass()) {
-            return (int) (power * WEAKER_ATTACK);
+            return (int) (power * REDUCTION_VALUE);
         } if (Type.FIRE.equals(this.getType()) && Type.WATER.equals(player.getType())
                 || Type.WATER.equals(this.getType()) && Type.EARTH.equals(player.getType())
                 || Type.EARTH.equals(this.getType()) && Type.FIRE.equals(player.getType())) {
-            return (int) (power * STRONGER_ATTACK);
+            return (int) (power * UPGRADE_VALUE);
         } else {
             return power;
         }
@@ -79,8 +78,8 @@ public class Pet {
     }
 
     private boolean checkIfEvaded(Pet player) {
-        double LOWER_LIMIT = 0.75;
-        double UPPER_LIMIT = 1.25;
+        double LOWER_LIMIT = REDUCTION_VALUE;
+        double UPPER_LIMIT = UPGRADE_VALUE;
         Random rand = new Random();
         if (!this.getState().equals(Action.EVADE)) {
             return !(this.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT))
