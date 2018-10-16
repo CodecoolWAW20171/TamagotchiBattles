@@ -25,7 +25,7 @@ public class Pet {
     private int playersTwoDefencePoints;
 
     public void primaryAttack(Pet player) {
-        if (checkIfEvaded(player)) {
+        if (!checkIfEvaded(player)) {
             int attackPower = this.getAttack();
             setPlayersTwoDefencePoints(getSecondPlayersDefence(player));
             attackPower = checkPrimaryTypes(player, attackPower);
@@ -47,7 +47,7 @@ public class Pet {
     }
 
     public void secondaryAttack(Pet player) {
-        if (checkIfEvaded(player)) {
+        if (!checkIfEvaded(player)) {
             setPlayersTwoDefencePoints(getSecondPlayersDefence(player));
             int attackPower = (int) (this.getAttack() * REDUCTION_VALUE);
             attackPower = checkSecondaryTypes(player, attackPower);
@@ -81,11 +81,11 @@ public class Pet {
         double LOWER_LIMIT = REDUCTION_VALUE;
         double UPPER_LIMIT = UPGRADE_VALUE;
         Random rand = new Random();
-        if (!this.getState().equals(Action.EVADE)) {
-            return !(this.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT))
+        if (Action.EVADE.equals(player.getState())) {
+            return (this.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT))
                     - player.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT)) > 0);
         }
-        return true;
+        return false;
     }
 
     public String getName() {
