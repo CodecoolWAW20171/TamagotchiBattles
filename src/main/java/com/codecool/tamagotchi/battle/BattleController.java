@@ -13,38 +13,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BattleController {
-    Battle battle = new Battle();
+    private Battle battle = new Battle();
 
     @PostMapping("/room")
-    public String petSubmit(OAuth2Authentication authentication, @ModelAttribute Pet pet) {
+    public String connectRoom(OAuth2Authentication authentication, @ModelAttribute Pet pet) {
         String username = new UserController().user(authentication);
-
         pet.setName(username);
-        if (battle.getFirstPlayer() == null) {
-            battle.setFirstPlayer(pet);
-        }
-        else if (battle.getSecondPlayer() == null) {
-            battle.setSecondPlayer(pet);
-        }
+
+        battle.addPlayer(pet);
         return "battle";
-    }
-
-    @PostMapping("/room/action")
-    public void action(OAuth2Authentication authentication) {
-        String username = new UserController().user(authentication);
-
-        if (username.equals(battle.getFirstPlayer().getName())) {
-            System.out.println("First player attack");
-            battle.getFirstPlayer().setState(Action.ATTACK);
-        } else if (username.equals(battle.getSecondPlayer().getName())) {
-            System.out.println("Second player attack");
-            battle.getSecondPlayer().setState(Action.ATTACK);
-        }
     }
 
     @MessageMapping("/action")
     @SendTo("/battle/log")
-    public BattleLog log(String message) {
+    public BattleLog log(OAuth2Authentication authentication, String message) {
+        String username = new UserController().user(authentication);
+
+        battle.setPlayerAction(username, message);
         return new BattleLog(message);
     }
 

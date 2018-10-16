@@ -100,8 +100,12 @@ public class Battle {
         return turn;
     }
 
-    public void setFirstPlayer(Pet pet) {
-        firstPlayer = pet;
+    public void addPlayer(Pet pet) {
+        if (firstPlayer == null) {
+            firstPlayer = pet;
+        } else if (secondPlayer == null) {
+            secondPlayer = pet;
+        }
     }
 
     public void setSecondPlayer(Pet pet) {
@@ -139,4 +143,28 @@ public class Battle {
     public void setBattleFinalString(String battleFinalString) {
         this.battleFinalString = battleFinalString;
     }
+
+    public void setPlayerAction(String username, String message) {
+        Action action = setActionFromString(message);
+
+        if (firstPlayer != null)
+            if (username.equals(firstPlayer.getName())) {
+                this.getFirstPlayer().setState(action);
+            }
+        if (secondPlayer != null)
+            if (username.equals(secondPlayer.getName())) {
+                this.getSecondPlayer().setState(action);
+            }
+    }
+
+    private Action setActionFromString(String action) {
+        switch (action) {
+            case "attack": return Action.ATTACK;
+            case "special": return Action.SECONDARY_ATTACK;
+            case "defend": return Action.DEFEND;
+            case "evade": return Action.EVADE;
+            default: return null;
+        }
+    }
+
 }
