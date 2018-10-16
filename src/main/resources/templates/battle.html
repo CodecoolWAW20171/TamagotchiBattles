@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -18,6 +18,14 @@
     <script type="application/javascript" src="js/battle/battle.js" defer></script>
 </head>
 <body>
+    <div id="petStats" th:object="${pet}">
+        <h2>Pet stats:</h2>
+        <p th:text="'Name: ' + ${pet.name}" />
+        <p th:text="'Type: ' + ${pet.type}" />
+        <p th:text="'Attack: ' + ${pet.attack}" />
+        <p th:text="'Defence: ' + ${pet.defence}" />
+        <p th:text="'Speed: ' + ${pet.speed}" />
+    </div>
     <h1>Battle</h1>
     <div id="actionBar">
         <button id="attack">Attack</button>

@@ -7,6 +7,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -16,9 +17,10 @@ public class BattleController {
     private Battle battle = new Battle();
 
     @PostMapping("/room")
-    public String connectRoom(OAuth2Authentication authentication, @ModelAttribute Pet pet) {
+    public String connectRoom(OAuth2Authentication authentication, Model model, @ModelAttribute Pet pet) {
         String username = new UserController().user(authentication);
         pet.setName(username);
+        model.addAttribute("pet", pet);
 
         battle.addPlayer(pet);
         return "battle";
