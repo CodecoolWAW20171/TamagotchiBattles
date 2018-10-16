@@ -1,67 +1,46 @@
 package com.codecool.tamagotchi.model.tamagotchi;
 
-import com.codecool.tamagotchi.model.tamagotchi.classes.Earth;
-import com.codecool.tamagotchi.model.tamagotchi.classes.Fire;
-import com.codecool.tamagotchi.model.tamagotchi.classes.Water;
 import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
-
-import javax.persistence.*;
+import com.codecool.tamagotchi.model.tamagotchi.enumerations.Type;
+import javax.validation.constraints.NotNull;
 import java.util.Random;
 
-@Entity
-@Table(name = "pets")
 public class Pet {
-    /*public Pet(){
-
-    }*/
-
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "name")
+    @NotNull
     private String name;
-    @Column(name = "exp")
-    private int exp = 0;
-    @Column(name = "attack")
+    @NotNull
     private int attack;
-    @Column(name = "defence")
+    @NotNull
     private int defence;
-    @Column(name = "speed")
+    @NotNull
     private int speed;
-    @Column(name = "health")
-    private int health;
-   /* private Action state;*/
+    @NotNull
+    private Type type;
+    private int exp = 0;
+    private double health = 100;
+    private Action state;
 
-   /* private final double WEAKER_ATTACK = 0.75;
+    private final double WEAKER_ATTACK = 0.75;
     private final double STRONGER_ATTACK = 1.25;
 
     private int playersTwoDefencePoints;
 
-    public Pet(String name, int attack, int defence, int speed) {
-        this.name = name;
-        this.attack = attack;
-        this.defence = defence;
-        this.speed = speed;
-    }
-
     public void primaryAttack(Pet player) {
-        if (!checkIfEvaded(this, player)) {
+        if (checkIfEvaded(player)) {
             int attackPower = this.getAttack();
             setPlayersTwoDefencePoints(getSecondPlayersDefence(player));
-            attackPower = checkPrimaryTypes(this, player, attackPower);
+            attackPower = checkPrimaryTypes(player, attackPower);
             attackPower = attackPower - getPlayersTwoDefencePoints();
             if (attackPower > 0) player.setHealth(player.getHealth() - attackPower);
         }
     }
 
-    private int checkPrimaryTypes(Pet playerOne, Pet playerTwo, int power) {
-        if (playerOne.getClass() == playerTwo.getClass()) {
+    private int checkPrimaryTypes(Pet player, int power) {
+        if (this.getType().equals(player.getType())) {
             return power;
-        } if (playerOne instanceof Fire && playerTwo instanceof Water
-                || playerOne instanceof Water && playerTwo instanceof Earth
-                || playerOne instanceof Earth && playerTwo instanceof Fire) {
+        } if (Type.FIRE.equals(this.getType()) && Type.WATER.equals(player.getType())
+                || Type.WATER.equals(this.getType()) && Type.EARTH.equals(player.getType())
+                || Type.EARTH.equals(this.getType()) && Type.FIRE.equals(player.getType())) {
             return (int) (power * WEAKER_ATTACK);
         } else {
             return (int) (power * STRONGER_ATTACK);
@@ -69,22 +48,22 @@ public class Pet {
     }
 
     public void secondaryAttack(Pet player) {
-        if (!checkIfEvaded(this, player)) {
+        if (checkIfEvaded(player)) {
             double SECONDARY_ATTACK_REDUCTION = 0.75;
             setPlayersTwoDefencePoints(getSecondPlayersDefence(player));
             int attackPower = (int) (this.getAttack() * SECONDARY_ATTACK_REDUCTION);
-            attackPower = checkSecondaryTypes(this, player, attackPower);
+            attackPower = checkSecondaryTypes(player, attackPower);
             attackPower = attackPower - getPlayersTwoDefencePoints();
             if (attackPower > 0) player.setHealth(player.getHealth() - attackPower);
         }
     }
 
-    private int checkSecondaryTypes(Pet playerOne, Pet playerTwo, int power) {
-        if (playerOne.getClass() == playerTwo.getClass()) {
+    private int checkSecondaryTypes(Pet player, int power) {
+        if (this.getClass() == player.getClass()) {
             return (int) (power * WEAKER_ATTACK);
-        } if (playerOne instanceof Fire && playerTwo instanceof Water
-                || playerOne instanceof Water && playerTwo instanceof Earth
-                || playerOne instanceof Earth && playerTwo instanceof Fire) {
+        } if (Type.FIRE.equals(this.getType()) && Type.WATER.equals(player.getType())
+                || Type.WATER.equals(this.getType()) && Type.EARTH.equals(player.getType())
+                || Type.EARTH.equals(this.getType()) && Type.FIRE.equals(player.getType())) {
             return (int) (power * STRONGER_ATTACK);
         } else {
             return power;
@@ -100,18 +79,17 @@ public class Pet {
         }
     }
 
-    private boolean checkIfEvaded(Pet playerOne, Pet playerTwo) {
+    private boolean checkIfEvaded(Pet player) {
         double LOWER_LIMIT = 0.75;
         double UPPER_LIMIT = 1.25;
         Random rand = new Random();
-        if (!playerOne.getState().equals(Action.EVADE)) {
-            return playerOne.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT))
-                    - playerTwo.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT)) > 0;
-        } else {
-            return false;
+        if (!this.getState().equals(Action.EVADE)) {
+            return !(this.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT))
+                    - player.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT)) > 0);
         }
+        return true;
     }
-*/
+
     public String getName() {
         return name;
     }
@@ -152,14 +130,22 @@ public class Pet {
         this.speed = speed;
     }
 
-    public int getHealth() {
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public double getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(double health) {
         this.health = health;
     }
-/*
+
     public Action getState() {
         return state;
     }
@@ -174,5 +160,17 @@ public class Pet {
 
     public void setPlayersTwoDefencePoints(int playersTwoDefencePoints) {
         this.playersTwoDefencePoints = playersTwoDefencePoints;
-    }*/
+    }
+
+    @Override
+    public String toString() {
+        return  "name: " + name + "\n" +
+                "type: " + type + "\n" +
+                "exp: " + exp + "\n" +
+                "attack: " + attack + "\n" +
+                "defence: " + defence + "\n" +
+                "speed: " + speed + "\n" +
+                "health: " + health + "\n" +
+                "state: " + state + "\n";
+    }
 }
