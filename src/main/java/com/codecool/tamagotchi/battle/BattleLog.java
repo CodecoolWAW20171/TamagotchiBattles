@@ -6,8 +6,8 @@ public class BattleLog {
     public BattleLog() {
     }
 
-    public BattleLog(String content) {
-        this.log = content;
+    BattleLog(String log) {
+        this.log = log;
     }
 
     public String getLog() {
