@@ -1,8 +1,7 @@
 package com.codecool.tamagotchi.dao;
 
-import com.codecool.tamagotchi.model.tamagotchi.Pet;
-import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
-import com.codecool.tamagotchi.model.tamagotchi.enumerations.Type;
+import com.codecool.tamagotchi.enumerations.*;
+import com.codecool.tamagotchi.pet.Pet;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

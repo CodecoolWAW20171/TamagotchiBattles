@@ -1,6 +1,6 @@
 package com.codecool.tamagotchi.controller;
 
-import com.codecool.tamagotchi.model.tamagotchi.Pet;
+import com.codecool.tamagotchi.pet.Pet;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

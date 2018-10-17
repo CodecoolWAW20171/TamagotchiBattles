@@ -1,6 +1,6 @@
 package com.codecool.tamagotchi.dao;
 
-import com.codecool.tamagotchi.model.tamagotchi.Pet;
+import com.codecool.tamagotchi.pet.Pet;
 
 import java.util.List;
 
