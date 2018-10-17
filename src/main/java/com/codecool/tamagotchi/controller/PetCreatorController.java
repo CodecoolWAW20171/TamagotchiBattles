@@ -18,7 +18,9 @@ public class PetCreatorController {
 
     @PostMapping("/createPet")
     public String petSubmit(@ModelAttribute Pet pet) {
-        System.out.println(pet.toString());
+        ManagePet mp = new ManagePet();
+        mp.addPet(pet);
+        System.out.println(pet);
         return "pet";
     }
 }

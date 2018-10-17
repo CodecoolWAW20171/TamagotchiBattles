@@ -133,9 +133,9 @@ public class Pet {
         return name;
     }
 //
-//    public void setName(String name) {
-//        this.name = name;
-//    }
+    public void setName(String name) {
+        this.name = name;
+    }
 //
 //    public int getExp() {
 //        return exp;
@@ -201,15 +201,15 @@ public class Pet {
 //        this.playersTwoDefencePoints = playersTwoDefencePoints;
 //    }
 //
-//    @Override
-//    public String toString() {
-//        return  "name: " + name + "\n" +
-//                "type: " + type + "\n" +
-//                "exp: " + exp + "\n" +
-//                "attack: " + attack + "\n" +
-//                "defence: " + defence + "\n" +
-//                "speed: " + speed + "\n" +
-//                "health: " + health + "\n" +
+    @Override
+    public String toString() {
+        return  "name: " + name + "\n" +
+                "type: " + type + "\n" +
+                "exp: " + exp + "\n" +
+                "attack: " + attack + "\n" +
+                "defence: " + defence + "\n" +
+                "speed: " + speed + "\n" +
+                "health: " + health + "\n";
 //                "state: " + state + "\n";
-//    }
+    }
 }
