@@ -108,24 +108,34 @@ public class Round {
 
     public double countDamage(Pet attacker) {
         double damage = 0;
+
         Pet defender;
         if(attacker.equals(firstAttacker)){
             defender = secondAttacker;
         } else {
             defender = firstAttacker;
         }
+        double modifier = secondAttackModifer(attacker);
+
         if (attacker.getState().equals(Action.ATTACK) || attacker.getState().equals(Action.SECONDARY_ATTACK)){
             if( defender.getState().equals(Action.DEFEND)) {
-                damage = attacker.getAttack() * countAttackerDefenderModifier() - defender.getDefence() * 2;
+                damage = modifier * attacker.getAttack() * countAttackerDefenderModifier() - defender.getDefence() * 2;
             } else if( defender.getState().equals(Action.EVADE)) {
-                damage = attacker.getSpeed() * getLuckModifier() - defender.getSpeed() * getLuckModifier();
+                damage = modifier * attacker.getSpeed() * getLuckModifier() - defender.getSpeed() * getLuckModifier();
             } else {
-                damage = attacker.getAttack() * countAttackerDefenderModifier() - defender.getDefence();
-                System.out.println("Damage: " + damage);
+                damage = modifier * attacker.getAttack() * countAttackerDefenderModifier() - defender.getDefence();
             }
         }
-
+        System.out.println("Damage: " + damage);
         return Math.abs(damage);
+    }
+
+    private double secondAttackModifer(Pet attacker) {
+        double modifier = 1;
+        if (attacker.getState().equals(Action.SECONDARY_ATTACK)) {
+            modifier = 0.75;
+        }
+        return modifier;
     }
 
     double countAttackerDefenderModifier() {

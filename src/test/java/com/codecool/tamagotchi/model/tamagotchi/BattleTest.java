@@ -28,14 +28,20 @@ public class BattleTest {
         player2.setName("Pet 2");
         player2.setAttack(50);
         player2.setDefence(50);
-        player2.setSpeed(60);
+        player2.setSpeed(70);
         player2.setType(Type.PAPER);
     }
+
     @Test
     public void startBattle() {
         player1.setState(Action.DEFEND);
-        player2.setState(Action.DEFEND);
+        player2.setState(Action.ATTACK);
         battle = new Battle(player1, player2);
+
         battle.startBattle();
+        player1.setState(Action.SECONDARY_ATTACK);
+        player2.setState(Action.DEFEND);
+        battle.startBattle();
+
     }
 }
