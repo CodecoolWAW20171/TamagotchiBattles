@@ -17,7 +17,7 @@ public class Battle {
         this.secondPlayer = secondPlayer;
     }
 
-   /* public void getOrder() {
+   public void getOrder() {
         setFirstPlayerHealthAtStartOfTurn(getFirstPlayer().getHealth());
         setSecondPlayerHealthAtStartOfTurn(getSecondPlayer().getHealth());
         if (getFirstPlayer().getSpeed() > getSecondPlayer().getSpeed()) {
@@ -28,17 +28,17 @@ public class Battle {
             //To give them both 50% chance, we use 0,5 as parameter
             if (rand.nextDouble() > 0.5) moveFirstPlayerFirst(); else moveSecondPlayerFirst();
         } else moveSecondPlayerFirst();
-    }*/
+    }
 
-   /* private void moveFirstPlayerFirst() {
+   private void moveFirstPlayerFirst() {
         makeAMove(getFirstPlayer(), getSecondPlayer());
     }
 
     private void moveSecondPlayerFirst() {
         makeAMove(getSecondPlayer(), getFirstPlayer());
     }
-*/
-    /*public void makeAMove(Pet playerOne, Pet playerTwo) {
+
+    public void makeAMove(Pet playerOne, Pet playerTwo) {
         if (checkPrimaryAttack(playerOne)) {
             playerOne.primaryAttack(playerTwo);
         } else if (checkSecondaryAttack(playerOne)) {
@@ -68,7 +68,7 @@ public class Battle {
 
     public boolean checkSecondaryAttack(Pet player) {
         return player.getState().equals(Action.SECONDARY_ATTACK);
-    }*/
+    }
 
     public void getBattleResult() {
         double damageDealtToSecondPlayer = getSecondPlayerHealthAtStartOfTurn() - getSecondPlayer().getHealth();
@@ -88,12 +88,12 @@ public class Battle {
         setBattleFinalString(getBattleFinalString() + result);
     }
 
-   /* public String goThroughTurn() {
+   public String goThroughTurn() {
         getOrder();
         //Increase turn by one
         setTurn(getTurn() + 1);
         return getBattleFinalString();
-    }*/
+    }
 
     public void setTurn(int turn) {
         this.turn = turn;
