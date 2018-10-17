@@ -1,0 +1,26 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "com.codecool.tamagotchi.model.tamagotchi.Pet" table = "pets">
+
+        <meta attribute = "class-description">
+            This class contains the pet detail.
+        </meta>
+
+        <id name = "id" type = "int" column = "id">
+            <generator class="native"/>
+        </id>
+
+        <property name = "name" column = "name" type = "string"/>
+        <property name = "attack" column = "attack" type = "int"/>
+        <property name = "defence" column = "defence" type = "int"/>
+        <property name = "speed" column = "speed" type = "int"/>
+        <property name = "type" column = "type" type = "int"/>
+        <property name = "exp" column = "exp" type = "int"/>
+        <property name = "health" column = "health" type = "int"/>
+
+    </class>
+</hibernate-mapping>

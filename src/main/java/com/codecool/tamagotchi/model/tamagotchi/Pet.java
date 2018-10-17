@@ -15,6 +15,14 @@ public class Pet {
     @Column(name = "id")
     private int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Column(name = "name")
     @NotNull
     private String name;
@@ -37,6 +45,14 @@ public class Pet {
 
     @Column(name = "exp")
     private int exp = 0;
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
 
     @Column(name = "health")
     private double health = 100;
