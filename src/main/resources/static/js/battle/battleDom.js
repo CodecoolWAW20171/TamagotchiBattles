@@ -16,7 +16,16 @@ let battleDom = {
     },
     addEventHandlerToButtons() {
         this.actionBar.children().each(function( index, element ) {
-            element.addEventListener("click", () => battleService.sendAction(this.id));
-        });
+            element.addEventListener("click", function() {
+                battleService.sendAction(this.id);
+                battleDom.disableButtonsAfterChoosingAction();
+            });
+        })
     },
+    disableButtonsAfterChoosingAction() {
+        this.actionBar.children().each(function(index, element) { element.style.display = "none"; });
+    },
+    enableButtonsAfterTurn() {
+        this.actionBar.children().each(function(index, element) { element.style.display = "inline"; });
+    }
 };

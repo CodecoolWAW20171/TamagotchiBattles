@@ -3,6 +3,12 @@ package com.codecool.tamagotchi.battle;
 import com.codecool.tamagotchi.pet.Pet;
 import com.codecool.tamagotchi.enumerations.Action;
 
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Random;
 
 class Battle {
@@ -13,6 +19,7 @@ class Battle {
     // Calculate turns for battle to view information in user friendly way, starting from 1
     private int turn = 1;
     private String battleFinalString;
+    private boolean isGameOver;
 
     private void getOrder() {
         firstPlayerHealthAtStartOfTurn = getFirstPlayer().getHealth();
@@ -77,7 +84,8 @@ class Battle {
     }
 
     private boolean checkIfWon(Pet player) {
-        return player.getHealth() <= 0;
+        if(player.getHealth() <= 0) { isGameOver = true; }
+        return isGameOver;
     }
 
     private void addWinningString(Pet player) {
@@ -85,13 +93,12 @@ class Battle {
         battleFinalString = battleFinalString + result;
     }
 
-    private String goThroughTurn() {
+    private void goThroughTurn() {
         getOrder();
         //Increase turn by one
         turn++;
         firstPlayer.setState(null);
         secondPlayer.setState(null);
-        return battleFinalString;
     }
 
     void addPlayer(Pet pet) {
@@ -110,8 +117,9 @@ class Battle {
         return secondPlayer;
     }
 
-    String setPlayerAction(String username, String message) {
+    BattleLog setPlayerAction(String username, String message) {
         Action action = setActionFromString(message);
+        BattleLog battleLog = new BattleLog();
 
         if (firstPlayer != null && secondPlayer != null) {
             if (username.equals(firstPlayer.getName()))
@@ -121,10 +129,14 @@ class Battle {
 
             if (firstPlayer.getState() != null && secondPlayer.getState() != null) {
                 goThroughTurn();
-                return battleFinalString;
+                battleLog.setUnlockButtons(true);
+                battleLog.setGameOver(isGameOver);
+                battleLog.setLog(battleFinalString);
+                return battleLog;
             }
         }
-        return username + " set up his action";
+        battleLog.setLog(username + " set up his action");
+        return battleLog;
     }
 
     private Action setActionFromString(String action) {
