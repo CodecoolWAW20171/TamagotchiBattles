@@ -1,7 +1,11 @@
 package com.codecool.tamagotchi.model.tamagotchi.enumerations;
 
 public enum Type {
-    FIRE("fire"),
+    ROCK,
+    PAPER,
+    SCISSORS
+
+    /*FIRE("fire"),
     WATER("water"),
     EARTH("earth");
 
@@ -13,5 +17,5 @@ public enum Type {
 
     public String getGroupType() {
         return type;
-    }
+    }*/
 }

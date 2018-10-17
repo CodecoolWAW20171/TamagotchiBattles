@@ -1,28 +1,37 @@
 package com.codecool.tamagotchi.model.tamagotchi;
 
 public class Battle {
-    private Pet firstPlayer;
-    private Pet secondPlayer;
-    private int turn = 1;
 
-    public Battle(Pet firstPlayer, Pet secondPlayer) {
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = secondPlayer;
+    private Pet player1;
+    private Pet player2;
+
+    private Round round;
+    private int roundNumber;
+
+    public Battle(Pet player1, Pet player2) {
+        this.player1 = player1;
+        this.player2 = player2;
+        roundNumber = 1;
     }
 
-    public String nextTurn() {
-        return "";
+    public void startBattle() {
+        if(isNextRoundPossible()) {
+            round = new Round(player1, player2);
+            round.fight();
+        } else {
+            System.out.println(endBattle());
+        }
     }
 
-    public int getTurn() {
-        return turn;
+    private boolean isNextRoundPossible() {
+        if(player1.getHealth() <= 0 || player2.getHealth() <=0 ) {
+            return false;
+        }
+        return true;
     }
 
-    public Pet getFirstPlayer() {
-        return firstPlayer;
+    private String endBattle(){
+        return "End Battle";
     }
 
-    public Pet getSecondPlayer() {
-        return secondPlayer;
-    }
 }
