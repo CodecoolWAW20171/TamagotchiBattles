@@ -10,8 +10,17 @@ import java.util.LinkedHashMap;
 public class UserController {
 
     @RequestMapping("/user")
-    public String user(OAuth2Authentication authentication) {
+    public LinkedHashMap<String, Object> user(OAuth2Authentication authentication) {
         LinkedHashMap<String, Object> properties = (LinkedHashMap<String, Object>) authentication.getUserAuthentication().getDetails();
-        return (String) properties.get("name");
+        return properties;
     }
+
+    public String getUsername(OAuth2Authentication authentication) {
+        return (String) user(authentication).get("name");
+    }
+
+    public String getUserId(OAuth2Authentication authentication) {
+        return (String) user(authentication).get("id");
+    }
+
 }

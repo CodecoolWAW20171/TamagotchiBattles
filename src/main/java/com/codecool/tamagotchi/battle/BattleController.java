@@ -18,7 +18,7 @@ public class BattleController {
 
     @PostMapping("/room")
     public String connectRoom(OAuth2Authentication authentication, Model model, @ModelAttribute Pet pet) {
-        String username = new UserController().user(authentication);
+        String username = new UserController().getUsername(authentication);
         pet.setName(username);
         model.addAttribute("pet", pet);
 
@@ -29,7 +29,7 @@ public class BattleController {
     @MessageMapping("/action")
     @SendTo("/battle/log")
     public BattleLog log(OAuth2Authentication authentication, String message) {
-        String username = new UserController().user(authentication);
+        String username = new UserController().getUsername(authentication);
 
         return battle.setPlayerAction(username, message);
     }
