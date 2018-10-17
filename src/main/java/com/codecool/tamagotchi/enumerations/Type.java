@@ -1,4 +1,4 @@
-package com.codecool.tamagotchi.model.tamagotchi.enumerations;
+package com.codecool.tamagotchi.enumerations;
 
 public enum Type {
     FIRE("fire"),

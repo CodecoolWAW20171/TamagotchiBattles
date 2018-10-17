@@ -1,6 +1,6 @@
-package com.codecool.tamagotchi.controller;
+package com.codecool.tamagotchi.pet;
 
-import com.codecool.tamagotchi.model.tamagotchi.Pet;
+import com.codecool.tamagotchi.controller.ManagePet;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class PetCreatorController {
+public class PetController {
+
 
     @GetMapping("/createPet")
     public String petForm(Model model) {

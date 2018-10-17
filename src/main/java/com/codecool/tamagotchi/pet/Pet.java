@@ -1,7 +1,7 @@
-package com.codecool.tamagotchi.model.tamagotchi;
+package com.codecool.tamagotchi.pet;
 
-import com.codecool.tamagotchi.model.tamagotchi.enumerations.Action;
-import com.codecool.tamagotchi.model.tamagotchi.enumerations.Type;
+import com.codecool.tamagotchi.enumerations.Action;
+import com.codecool.tamagotchi.enumerations.Type;
 import javax.validation.constraints.NotNull;
 import java.util.Random;
 import javax.persistence.*;
@@ -51,13 +51,14 @@ public class Pet {
 
     private Action state;
 
-    private final double WEAKER_ATTACK = 0.75;
-    private final double STRONGER_ATTACK = 1.25;
+    private final double REDUCTION_VALUE = 0.75;
+    private final double UPGRADE_VALUE = 1.25;
 
+    // this variable is set in case second player is defending
     private int playersTwoDefencePoints;
 
     public void primaryAttack(Pet player) {
-        if (checkIfEvaded(player)) {
+        if (!checkIfEvaded(player)) {
             int attackPower = this.getAttack();
             setPlayersTwoDefencePoints(getSecondPlayersDefence(player));
             attackPower = checkPrimaryTypes(player, attackPower);
@@ -72,17 +73,16 @@ public class Pet {
         } if (Type.FIRE.equals(this.getType()) && Type.WATER.equals(player.getType())
                 || Type.WATER.equals(this.getType()) && Type.EARTH.equals(player.getType())
                 || Type.EARTH.equals(this.getType()) && Type.FIRE.equals(player.getType())) {
-            return (int) (power * WEAKER_ATTACK);
+            return (int) (power * REDUCTION_VALUE);
         } else {
-            return (int) (power * STRONGER_ATTACK);
+            return (int) (power * UPGRADE_VALUE);
         }
     }
 
     public void secondaryAttack(Pet player) {
-        if (checkIfEvaded(player)) {
-            double SECONDARY_ATTACK_REDUCTION = 0.75;
+        if (!checkIfEvaded(player)) {
             setPlayersTwoDefencePoints(getSecondPlayersDefence(player));
-            int attackPower = (int) (this.getAttack() * SECONDARY_ATTACK_REDUCTION);
+            int attackPower = (int) (this.getAttack() * REDUCTION_VALUE);
             attackPower = checkSecondaryTypes(player, attackPower);
             attackPower = attackPower - getPlayersTwoDefencePoints();
             if (attackPower > 0) player.setHealth(player.getHealth() - attackPower);
@@ -91,11 +91,11 @@ public class Pet {
 
     private int checkSecondaryTypes(Pet player, int power) {
         if (this.getClass() == player.getClass()) {
-            return (int) (power * WEAKER_ATTACK);
+            return (int) (power * REDUCTION_VALUE);
         } if (Type.FIRE.equals(this.getType()) && Type.WATER.equals(player.getType())
                 || Type.WATER.equals(this.getType()) && Type.EARTH.equals(player.getType())
                 || Type.EARTH.equals(this.getType()) && Type.FIRE.equals(player.getType())) {
-            return (int) (power * STRONGER_ATTACK);
+            return (int) (power * UPGRADE_VALUE);
         } else {
             return power;
         }
@@ -111,14 +111,16 @@ public class Pet {
     }
 
     private boolean checkIfEvaded(Pet player) {
-        double LOWER_LIMIT = 0.75;
-        double UPPER_LIMIT = 1.25;
+        double LOWER_LIMIT = REDUCTION_VALUE;
+        double UPPER_LIMIT = UPGRADE_VALUE;
         Random rand = new Random();
-        if (!this.getState().equals(Action.EVADE)) {
-            return !(this.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT))
-                    - player.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT)) > 0);
+        if (Action.EVADE.equals(player.getState())) {
+            /* return true is one players speed multiplied by random value between given brackets 0.75 - 1.25 if faster
+             than the other */
+            return (player.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT))
+                    - this.getSpeed() * (LOWER_LIMIT + rand.nextDouble() * (UPPER_LIMIT - LOWER_LIMIT)) > 0);
         }
-        return true;
+        return false;
     }
 
     public String getName() {
