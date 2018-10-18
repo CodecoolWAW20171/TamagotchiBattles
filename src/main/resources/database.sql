@@ -4,6 +4,7 @@
 CREATE TABLE public.pets
 (
   id serial PRIMARY KEY ,
+  user_id varchar (100),
   name varchar(100),
   exp int,
   attack int,

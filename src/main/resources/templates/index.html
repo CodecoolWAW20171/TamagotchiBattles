@@ -12,7 +12,7 @@
     <script type="text/javascript">
         $.get("/user", function(data) {
             if(data) {
-                $(location).attr('href', '/createPet')
+                $(location).attr('href', '/createPet?id='+data.id)
             }
         });
 

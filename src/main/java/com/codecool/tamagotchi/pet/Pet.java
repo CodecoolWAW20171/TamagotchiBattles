@@ -15,6 +15,18 @@ public class Pet {
     @Column(name = "id")
     private int id;
 
+    @Column(name = "user_id")
+    @NotNull
+    private String user_id;
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
     public int getId() {
         return id;
     }
@@ -201,7 +213,8 @@ public class Pet {
 
     @Override
     public String toString() {
-        return  "name: " + name + "\n" +
+        return  "user_id: " + user_id + "\n" +
+                "name: " + name + "\n" +
                 "type: " + type + "\n" +
                 "exp: " + exp + "\n" +
                 "attack: " + attack + "\n" +

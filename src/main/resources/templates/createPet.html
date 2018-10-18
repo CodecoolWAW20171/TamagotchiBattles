@@ -2,18 +2,27 @@
 <th:block th:include="fragments/general.html :: header" xmlns:th="http://www.w3.org/1999/xhtml"></th:block>
 <head>
     <title>Pet creator</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <script src="webjars/jquery/3.3.1-1/jquery.min.js" defer></script>
     <script src="js/createGotchiPointsDistribution.js" type="application/javascript" defer></script>
 </head>
 <body>
 <h1>Form</h1>
 <form action="#" th:action="@{/createPet}" th:object="${pet}" method="post">
-    <p>Name: <input id="name" type="text" th:field="*{name}" required /></p>
+    <script>
+        let params = new URLSearchParams(document.location.search.substring(1));
+        let id = params.get("id");
+    </script>
+    <input id="user_id" name="user_id" th:type="text" th:field="*{user_id}" th:hidden="true">
+    <script>
+        document.getElementById('user_id').value = id;
+    </script>
+    </input>
+    <p>Name: <input id="name" type="text" th:field="*{name}" required/></p>
     <p>
         Type:
         <select name="type" th:field="*{type}" class="form-control" id="type" required>
-            <option class = "description" value="" disabled selected hidden>Choose type attack</option>
+            <option class="description" value="" disabled selected hidden>Choose type attack</option>
             <option th:each="primary : ${T(com.codecool.tamagotchi.enumerations.Type).values()}"
                     th:value="${primary}"
                     th:text="${primary}"
@@ -23,8 +32,8 @@
         </select>
     </p>
     <p>You have <span id="points-left">200</span> points left</p>
-    <p>Attack: <input id="attack-input" type="number" th:field="*{attack}" required /></p>
-    <p>Defence: <input id="defence-input" type="number" th:field="*{defence}" required /></p>
-    <p>Speed: <input id="speed-input" type="number" th:field="*{speed}" required /></p>
+    <p>Attack: <input id="attack-input" type="number" th:field="*{attack}" required/></p>
+    <p>Defence: <input id="defence-input" type="number" th:field="*{defence}" required/></p>
+    <p>Speed: <input id="speed-input" type="number" th:field="*{speed}" required/></p>
     <p><input id="submit-button" type="submit" value="Submit" disabled="true"/></p>
 </form>
