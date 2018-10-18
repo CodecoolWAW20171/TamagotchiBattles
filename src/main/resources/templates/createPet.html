@@ -1,62 +1,93 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::script}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/assets/css/main.css}"/>
+
     <title>Pet creator</title>
 
+    <!-- Scripts -->
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
     <script src="js/createGotchiPointsDistribution.js" type="application/javascript" defer></script>
 
 </head>
 
 <body>
 
-<section>
-<h1 class="title">Pet Creator</h1>
-<form action="#" th:action="@{/addNewPet}" th:object="${pet}" method="post">
-    <div class="input-group input-group-sm mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="input-name">Name:</span>
+    <div id="wrapper" class="bg">
+        <!-- Main -->
+        <div class="main">
+            <div class="content">
+                <h1 class="title">Pet Creator</h1>
+
+                <form action="#" th:action="@{/addNewPet}" th:object="${pet}" method="post">
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="input-name">Name:</span>
+                        </div>
+                        <input id="name" type="text" class="form-control" aria-label="small"
+                               aria-describedby="input-name" th:field="*{name}" required />
+                    </div>
+
+                    <p>
+                        Type:
+                        <select name="type" th:field="*{type}" class="form-control" id="type" required>
+                            <option class="form-group" value="" disabled selected hidden>Choose type attack</option>
+                            <option th:each="primary : ${T(com.codecool.tamagotchi.enumerations.Type).values()}"
+                                    th:value="${primary}"
+                                    th:text="${primary}"
+                                    th:class="${primary.groupType}">
+                            </option>
+                        </select>
+                    </p>
+
+                    <p>You have <span id="points-left">200</span> points left</p>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="input-attack">Attack:</span>
+                        </div>
+                        <input id="attack-input" type="number" class="form-control" aria-label="small"
+                               aria-describedby="input-attack" th:field="*{attack}" required />
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="input-defence">Defence:</span>
+                        </div>
+                        <input id="defence-input" type="number" class="form-control" aria-label="small"
+                               aria-describedby="input-defence" th:field="*{defence}" required />
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="input-speed">Speed:</span>
+                        </div>
+                        <input id="speed-input" type="number" class="form-control" aria-label="small"
+                               aria-describedby="input-speed" th:field="*{speed}" required />
+                    </div>
+
+                    <p><input id="submit-button" class="btn btn-success" type="submit" value="Submit" disabled="true"/></p>
+
+                </form>
+            </div>
         </div>
-        <input id="name" type="text" class="form-control" aria-label="small"
-               aria-describedby="input-name" th:field="*{name}" required />
     </div>
-    <p>
-        Type:
-        <select name="type" th:field="*{type}" class="form-control" id="type" required>
-            <option class="form-group" value="" disabled selected hidden>Choose type attack</option>
-            <option th:each="primary : ${T(com.codecool.tamagotchi.enumerations.Type).values()}"
-                    th:value="${primary}"
-                    th:text="${primary}"
-                    th:class="${primary.groupType}">
-            </option>
-        </select>
-        </p>
-        <p>You have <span id="points-left">200</span> points left</p>
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="input-attack">Attack:</span>
-            </div>
-            <input id="attack-input" type="number" class="form-control" aria-label="small"
-                   aria-describedby="input-attack" th:field="*{attack}" required />
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="fixed-bottom align-content-center badge badge-dark">
+            <p class="copyright">&copy; 2018 Los Burritos. All rights reserved.</p>
         </div>
-
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="input-defence">Defence:</span>
-            </div>
-            <input id="defence-input" type="number" class="form-control" aria-label="small"
-                   aria-describedby="input-defence" th:field="*{defence}" required />
-        </div>
-
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="input-speed">Speed:</span>
-            </div>
-            <input id="speed-input" type="number" class="form-control" aria-label="small"
-                   aria-describedby="input-speed" th:field="*{speed}" required />
-        </div>
-        <p><input id="submit-button" class="btn btn-success" type="submit" value="Submit" disabled="true"/></p>
-    </form>
-</section>
+    </footer>
 
 </body>
 </html>

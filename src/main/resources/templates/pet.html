@@ -1,17 +1,44 @@
 <!DOCTYPE HTML>
-<html th:replace="~{layout :: layout(~{::title}, ~{::script}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/assets/css/main.css}"/>
+
     <title>Pet</title>
-    <script></script>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+
 </head>
 <body>
-    <section>
-        <h1>Your pet:</h1>
-        <p th:text="'Name: ' + ${pet.name}" />
-        <p th:text="'Type: ' + ${pet.type}" />
-        <p th:text="'Attack: ' + ${pet.attack}" />
-        <p th:text="'Defence: ' + ${pet.defence}" />
-        <p th:text="'Speed: ' + ${pet.speed}" />
-    </section>
+
+    <div id="wrapper" class="bg">
+        <!-- Main -->
+        <div class="main">
+            <div class="content">
+                <h1>Your pet:</h1>
+                <p th:text="'Name: ' + ${pet.name}" />
+                <p th:text="'Type: ' + ${pet.type}" />
+                <p th:text="'Attack: ' + ${pet.attack}" />
+                <p th:text="'Defence: ' + ${pet.defence}" />
+                <p th:text="'Speed: ' + ${pet.speed}" />
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="fixed-bottom align-content-center badge badge-dark">
+            <p class="copyright">&copy; 2018 Los Burritos. All rights reserved.</p>
+        </div>
+    </footer>
+
 </body>
 </html>

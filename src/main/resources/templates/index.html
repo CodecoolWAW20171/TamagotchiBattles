@@ -1,9 +1,21 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::script}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/assets/css/main.css}"/>
+
     <title>Index</title>
 
+    <!-- Scripts -->
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
     <script type="text/javascript" src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script type="text/javascript" src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script type="application/javascript" src="js/websocket.js" defer></script>
@@ -15,19 +27,28 @@
 
 <body>
 
-<section>
-    <h1>Home</h1>
-
-    <div id="actionBar">
-        <button type="submit" class="btn btn-info" th:action="@{/logout}">Logout</button>
-        <button id="showPets" class="btn btn-success">Pets</button>
-        <button id="showRooms" class="btn btn-success">Rooms</button>
-        <button id="addRoom" class="btn btn-danger">Add room</button>
+    <div id="wrapper" class="bg">
+        <!-- Main -->
+        <div class="main">
+            <div class="content">
+                <h1>Home</h1>
+                <div id="actionBar">
+                    <button type="submit" class="btn btn-info" th:action="@{/logout}">Logout</button>
+                    <button id="showPets" class="btn btn-success">Pets</button>
+                    <button id="showRooms" class="btn btn-success">Rooms</button>
+                    <button id="addRoom" class="btn btn-danger">Add room</button>
+                </div>
+                <div id="petsDiv"></div>
+                <div id="roomsDiv"></div>
+            </div>
+        </div>
     </div>
-
-    <div id="petsDiv"></div>
-    <div id="roomsDiv"></div>
-</section>
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="fixed-bottom align-content-center badge badge-dark">
+            <p class="copyright">&copy; 2018 Los Burritos. All rights reserved.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
