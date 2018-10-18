@@ -19,8 +19,8 @@ public class UserController {
         return (String) user(authentication).get("name");
     }
 
-    public String getUserId(OAuth2Authentication authentication) {
-        return (String) user(authentication).get("id");
+    public Long getUserId(OAuth2Authentication authentication) {
+        return Long.valueOf(((String) user(authentication).get("id")));
     }
 
 }

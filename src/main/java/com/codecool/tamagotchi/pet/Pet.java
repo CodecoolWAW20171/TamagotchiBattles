@@ -13,7 +13,6 @@ import javax.persistence.*;
 @Entity
 public class Pet {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String name;
 
@@ -133,7 +132,7 @@ public class Pet {
         return name;
     }
 
-    public void setName(String name) {
+    void setName(String name) {
         this.name = name;
     }
 
@@ -193,23 +192,24 @@ public class Pet {
         this.state = state;
     }
 
-    public int getPlayersTwoDefencePoints() {
+    private int getPlayersTwoDefencePoints() {
         return playersTwoDefencePoints;
     }
 
-    public void setPlayersTwoDefencePoints(int playersTwoDefencePoints) {
+    private void setPlayersTwoDefencePoints(int playersTwoDefencePoints) {
         this.playersTwoDefencePoints = playersTwoDefencePoints;
     }
 
     @Override
     public String toString() {
-        return  "name: " + name + "\n" +
-                "type: " + type + "\n" +
-                "exp: " + exp + "\n" +
-                "attack: " + attack + "\n" +
-                "defence: " + defence + "\n" +
-                "speed: " + speed + "\n" +
-                "health: " + health + "\n" +
-                "state: " + state + "\n";
+        return  "\nid: " + id +
+                "\nname: " + name +
+                "\ntype: " + type +
+                "\nexp: " + exp +
+                "\nattack: " + attack +
+                "\ndefence: " + defence +
+                "\nspeed: " + speed +
+                "\nhealth: " + health +
+                "\nstate: " + state;
     }
 }
