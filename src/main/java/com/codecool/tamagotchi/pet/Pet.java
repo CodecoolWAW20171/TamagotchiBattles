@@ -13,7 +13,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "pets")
 public class Pet {
-
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id")
@@ -59,10 +58,8 @@ public class Pet {
     @NotNull
     private Type type;
 
-    @Column(name = "exp")
     private int exp = 0;
 
-    @Column(name = "health")
     private double health = 100;
 
     @Transient

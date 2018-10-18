@@ -2,42 +2,42 @@
 <html th:replace="~{layout :: layout(~{::title}, ~{::script}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Pet creator</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <script src="webjars/jquery/3.3.1-1/jquery.min.js" defer></script>
+
     <script src="js/createGotchiPointsDistribution.js" type="application/javascript" defer></script>
 
 </head>
 
 <body>
+
 <section>
-    <h1 class="title">Pet Creator</h1>
-    <form action="#" th:action="@{/room}" th:object="${pet}" method="post">
-        <script>
-            let params = new URLSearchParams(document.location.search.substring(1));
-            let id = params.get("id");
-        </script>
-        <input id="user_id" name="user_id" th:type="text" th:field="*{user_id}" th:hidden="true">
-        <script>
-            document.getElementById('user_id').value = id;
-        </script>
-        </input>
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="input-name">Name:</span>
-            </div>
-            <input id="name" type="text" class="form-control" aria-label="small"
-                   aria-describedby="input-name" th:field="*{name}" required/>
+<h1 class="title">Pet Creator</h1>
+<form action="#" th:action="@{/addNewPet}" th:object="${pet}" method="post">
+    <script>
+        let params = new URLSearchParams(document.location.search.substring(1));
+        let id = params.get("id");
+    </script>
+    <input id="user_id" name="user_id" th:type="text" th:field="*{user_id}" th:hidden="true">
+    <script>
+        document.getElementById('user_id').value = id;
+    </script>
+    </input>
+    <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="input-name">Name:</span>
         </div>
-        <p>
-            Type:
-            <select name="type" th:field="*{type}" class="form-control" id="type" required>
-                <option class="form-group" value="" disabled selected hidden>Choose type attack</option>
-                <option th:each="primary : ${T(com.codecool.tamagotchi.enumerations.Type).values()}"
-                        th:value="${primary}"
-                        th:text="${primary}"
-                        th:class="${primary.groupType}">
-                </option>
-            </select>
+        <input id="name" type="text" class="form-control" aria-label="small"
+               aria-describedby="input-name" th:field="*{name}" required />
+    </div>
+    <p>
+        Type:
+        <select name="type" th:field="*{type}" class="form-control" id="type" required>
+            <option class="form-group" value="" disabled selected hidden>Choose type attack</option>
+            <option th:each="primary : ${T(com.codecool.tamagotchi.enumerations.Type).values()}"
+                    th:value="${primary}"
+                    th:text="${primary}"
+                    th:class="${primary.groupType}">
+            </option>
+        </select>
         </p>
         <p>You have <span id="points-left">200</span> points left</p>
         <div class="input-group input-group-sm mb-3">

@@ -43,7 +43,7 @@ public class BattleController {
     public String connectRoom(OAuth2Authentication authentication,
                               Model model,
                               @PathVariable Long id) {
-        Long userId = Long.valueOf(new UserController().getUserId(authentication));
+        Long userId = new UserController().getUserId(authentication);
         Pet userPet = petRepository.findPetById(userId);
 
         model.addAttribute("pet", userPet);
@@ -68,7 +68,7 @@ public class BattleController {
     @MessageMapping("/addNewRoom")
     @SendTo("/lobby/newBattles")
     public Battle newBattle(OAuth2Authentication authentication) {
-        Long userId = Long.valueOf(new UserController().getUserId(authentication));
+        Long userId = new UserController().getUserId(authentication);
         Battle battle = new Battle();
 
         battle.addPlayer(petRepository.findPetById(userId));
