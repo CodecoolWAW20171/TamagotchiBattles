@@ -52,4 +52,15 @@ public class BattleController {
     public Iterable<Battle> battlesList() {
         return repository.findAll();
     }
+
+    @MessageMapping("/addNewRoom")
+    @SendTo("/lobby/newBattles")
+    public Battle newBattle(OAuth2Authentication authentication) {
+        Long userId = Long.valueOf(new UserController().getUserId(authentication));
+        Battle battle = new Battle();
+
+        battle.addPlayer(petRepository.findPetById(userId));
+        repository.save(battle);
+        return battle;
+    }
 }
