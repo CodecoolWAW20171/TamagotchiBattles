@@ -20,4 +20,8 @@ public class PetService {
     public List<Pet> getAllPets() {
         return petDao.selectAllPets();
     }
+
+    public List<Pet> getPetById(int id) {
+        return petDao.selectPetById(id);
+    }
 }

@@ -11,4 +11,6 @@ public interface PetDao {
     void secondaryAttack(Pet playerOne, Pet playerTwo);
     int checkSecondaryTypes(Pet playerOne, Pet playerTwo, int power);
     List<Pet> selectAllPets();
+    List<Pet> selectPetById(int id);
+    DataBaseConnection getSession();
 }

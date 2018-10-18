@@ -25,7 +25,11 @@ public class PetResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private List<Pet> getAllPets() {
-        return petService.getAllPets();
+//    private List<Pet> getAllPets() {
+//        return petService.getAllPets();
+//    }
+
+    private List<Pet> getPetById() {
+        return petService.getPetById(2);
     }
 }

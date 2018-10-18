@@ -11,7 +11,7 @@
 
 <section>
     <h1>Form</h1>
-    <form action="#" th:action="@{/room}" th:object="${pet}" method="post">
+    <form action="#" th:action="@{/createPet}" th:object="${pet}" method="post">
         <p>
             Type:
             <select name="type" th:field="*{type}" class="form-control" id="type" required>

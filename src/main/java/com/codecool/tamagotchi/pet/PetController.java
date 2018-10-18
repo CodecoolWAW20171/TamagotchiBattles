@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 @Controller
 public class PetController {
 
@@ -14,6 +15,7 @@ public class PetController {
     @GetMapping("/createPet")
     public String petForm(Model model) {
         model.addAttribute("pet", new Pet());
+        System.out.println("OK!!!!!!");
         return "createPet";
     }
 
