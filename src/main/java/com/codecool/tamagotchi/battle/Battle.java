@@ -3,15 +3,17 @@ package com.codecool.tamagotchi.battle;
 import com.codecool.tamagotchi.pet.Pet;
 import com.codecool.tamagotchi.enumerations.Action;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Random;
 
+@Entity
 class Battle {
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
     private Pet firstPlayer;
     private Pet secondPlayer;
     private double firstPlayerHealthAtStartOfTurn;
