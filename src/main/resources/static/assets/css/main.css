@@ -1,0 +1,13 @@
+body, html {
+    height: 100%;
+    /*color: white;*/
+}
+
+.bg {
+    /*background-image: url("../image/tamagotchi.jpg");*/
+    /*height: 100%;*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+    /*opacity: 60%;*/
+}
