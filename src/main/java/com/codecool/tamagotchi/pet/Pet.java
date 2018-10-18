@@ -2,10 +2,18 @@ package com.codecool.tamagotchi.pet;
 
 import com.codecool.tamagotchi.enumerations.Action;
 import com.codecool.tamagotchi.enumerations.Type;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.Random;
 
+@Entity
 public class Pet {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
     private String name;
     @NotNull
     private int attack;
@@ -24,6 +32,16 @@ public class Pet {
 
     // this variable is set in case second player is defending
     private int playersTwoDefencePoints;
+
+    public Pet() {}
+
+    public Pet(String name, int attack, int defence, int speed, Type type) {
+        this.name = name;
+        this.attack = attack;
+        this.defence = defence;
+        this.speed = speed;
+        this.type = type;
+    }
 
     public void primaryAttack(Pet player) {
         if (!checkIfEvaded(player)) {
