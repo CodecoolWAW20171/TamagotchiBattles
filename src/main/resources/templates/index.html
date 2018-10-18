@@ -4,6 +4,13 @@
 <head>
     <title>Index</title>
 
+    <script type="text/javascript" src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script type="text/javascript" src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script type="application/javascript" src="js/websocket.js" defer></script>
+    <script type="application/javascript" src="js/index/lobbyService.js" defer></script>
+    <script type="application/javascript" src="js/index/lobbyDom.js" defer></script>
+    <script type="application/javascript" src="js/index/lobby.js" defer></script>
+
     <script th:include="fragments/scripts :: indexScript" th:defer="true" type="text/javascript"></script>
 
 </head>
@@ -11,14 +18,17 @@
 <body>
 
 <section>
+    <h1>Home</h1>
 
-    <h1 class="title">Tamagotchi battles</h1><br>
-    <div class="container">
-        <div class="container unauthenticated">
-           With Facebook: <a href="/login">click here</a>
-        </div>
+    <div id="actionBar">
+        <button type="submit" class="btn btn-info" th:action="@{/logout}">Logout</button>
+        <button id="showPets" class="btn btn-success">Pets</button>
+        <button id="showRooms" class="btn btn-success">Rooms</button>
+        <button id="addRoom" class="btn btn-danger">Add room</button>
     </div>
 
+    <div id="petsDiv"></div>
+    <div id="roomsDiv"></div>
 </section>
 
 </body>

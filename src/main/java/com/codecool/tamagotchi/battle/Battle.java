@@ -3,16 +3,17 @@ package com.codecool.tamagotchi.battle;
 import com.codecool.tamagotchi.pet.Pet;
 import com.codecool.tamagotchi.enumerations.Action;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import javax.persistence.*;
 import java.util.Random;
 
-class Battle {
+@Entity
+public class Battle {
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
+    @ManyToOne
     private Pet firstPlayer;
+    @ManyToOne
     private Pet secondPlayer;
     private double firstPlayerHealthAtStartOfTurn;
     private double secondPlayerHealthAtStartOfTurn;
@@ -20,6 +21,10 @@ class Battle {
     private int turn = 1;
     private String battleFinalString;
     private boolean isGameOver;
+
+    public Long getId() {
+        return id;
+    }
 
     private void getOrder() {
         firstPlayerHealthAtStartOfTurn = getFirstPlayer().getHealth();

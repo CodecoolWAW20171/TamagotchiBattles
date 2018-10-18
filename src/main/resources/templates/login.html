@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::script}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Battle Room</title>
+
+    <script type="application/javascript" th:src="@{/js/login/facebook.js}" defer></script>
+
+</head>
+<body>
+
+<section>
+
+    <h1>Login</h1>
+
+    <div class="containerUnauthenticated">
+        Login with Facebook: <a href="/login">click here</a>
+    </div>
+
+</section>
+
+</body>
+</html>
