@@ -18,7 +18,6 @@ public class PetController {
     @GetMapping("/createPet")
     public String petForm(Model model) {
         model.addAttribute("pet", new Pet());
-        System.out.println("OK!!!!!!");
         return "createPet";
     }
 
@@ -33,7 +32,6 @@ public class PetController {
         }
         System.out.println(pet);
         mp.addPet(pet);
-        System.out.println(pet);
         return "pet";
     }
 }
