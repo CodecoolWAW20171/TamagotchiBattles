@@ -3,18 +3,17 @@ package com.codecool.tamagotchi.battle;
 import com.codecool.tamagotchi.pet.Pet;
 import com.codecool.tamagotchi.enumerations.Action;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Random;
 
 @Entity
-class Battle {
+public class Battle {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+    @ManyToOne
     private Pet firstPlayer;
+    @ManyToOne
     private Pet secondPlayer;
     private double firstPlayerHealthAtStartOfTurn;
     private double secondPlayerHealthAtStartOfTurn;
