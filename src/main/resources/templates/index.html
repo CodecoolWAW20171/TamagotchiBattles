@@ -1,41 +1,24 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-<header th:insert="fragments/general.html :: header"> </header>
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::script}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Index</title>
+
+    <script th:include="fragments/scripts :: indexScript" th:defer="true" type="text/javascript"></script>
+
+</head>
+
 <body>
+
+<section>
     <h1>Tamagotchi battles</h1><br>
     <div class="container">
         <div class="container unauthenticated">
            With Facebook: <a href="/login">click here</a>
         </div>
     </div>
-    <script type="text/javascript">
-        $.get("/user", function(data) {
-            if(data) {
-                $(location).attr('href', '/createPet')
-            }
-        });
 
-        var logout = function() {
-            $.post("/logout", function() {
-                $("#user").html('');
-                $(".unauthenticated").show();
-            })
-            return true;
-        }
+</section>
 
-        $.ajaxSetup({
-            beforeSend : function(xhr, settings) {
-                if (settings.type === 'POST' || settings.type === 'PUT'
-                    || settings.type === 'DELETE') {
-                    if (!(/^http:.*/.test(settings.url) || /^https:.*/
-                        .test(settings.url))) {
-                        xhr.setRequestHeader("X-XSRF-TOKEN",
-                            Cookies.get('XSRF-TOKEN'));
-                    }
-                }
-            }
-        });
-    </script>
 </body>
 </html>
