@@ -2,6 +2,8 @@ let lobbyDom = {
     petsDiv: null,
     roomsDiv: null,
     init() {
+        lobbyService.requestAllPets();
+        lobbyService.requestAllRooms();
         this.petsDiv = $("#petsDiv");
         this.roomsDiv = $("#roomsDiv");
         this.addEventHandlerToButtons();
@@ -17,7 +19,7 @@ let lobbyDom = {
     showRooms(rooms) {
         rooms.forEach(room => {
             let div = document.createElement("div");
-            div .className = "pet";
+            div.className = "pet";
             div.appendChild(document.createTextNode( lobbyDom.roomToString(room) ));
             lobbyDom.petsDiv.appendChild(div);
         });
@@ -31,6 +33,12 @@ let lobbyDom = {
             lobbyDom.petsDiv.hide();
             lobbyDom.roomsDiv.show();
         });
+        $("#addRoom").click(function () {
+           lobbyService.addNewRoom();
+           lobbyService.fetchNewRoom().then(null, null, room => {
+               window.location.href = window.location.href + "room/" + room.id;
+           });
+        });
     },
     petStatsToString(pet) {
         return "Name: " + pet.name +
@@ -42,5 +50,11 @@ let lobbyDom = {
     },
     roomToString(room) {
         return "id: " + room.id;
+    },
+    addRoom(room) {
+        let div = document.createElement("div");
+        div.className = "room";
+        div.appendChild(document.createTextNode( lobbyDom.roomToString(room) ));
+        lobbyDom.petsDiv.appendChild(div);
     }
 };

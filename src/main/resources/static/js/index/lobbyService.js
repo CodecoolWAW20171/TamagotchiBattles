@@ -14,5 +14,11 @@ let lobbyService = {
     },
     requestAllRooms() {
         return this.client.send("/app/requestAllBattles");
-    }
+    },
+    addNewRoom() {
+        return this.client.send("/app/addNewRoom");
+    },
+    fetchNewRoom() {
+        return this.client.subscribe("/lobby/newBattles")
+    },
 };
