@@ -21,14 +21,13 @@ public class ManagePet {
     }
 
     /* Method to CREATE pet in the database */
-    public Integer addPet(Pet pet){
+    public String addPet(Pet pet){
         Session session = factory.openSession();
         Transaction tx = null;
-        Integer petID = null;
 
         try {
             tx = session.beginTransaction();
-            petID = (Integer) session.save(pet);
+            session.save(pet);
             tx.commit();
         } catch (HibernateException e) {
             if (tx!=null) tx.rollback();
@@ -36,7 +35,7 @@ public class ManagePet {
         } finally {
             session.close();
         }
-        return petID;
+        return pet.getName();
     }
 
 }

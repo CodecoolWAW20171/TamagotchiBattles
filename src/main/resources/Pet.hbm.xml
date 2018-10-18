@@ -10,7 +10,7 @@
             This class contains the pet detail.
         </meta>
 
-        <id name = "id" type = "int" column = "id">
+        <id name = "id" type = "long" column = "id">
             <generator class="native"/>
         </id>
 

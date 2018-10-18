@@ -15,7 +15,7 @@ public class UserResource {
                 LinkedHashMap<String, Object> properties =
                         (LinkedHashMap<String, Object>) authentication.getUserAuthentication().getDetails();
 
-                return properties.get("name");
+                return properties.get("id");
         }
         return null;
     }
