@@ -2,6 +2,8 @@ package com.codecool.tamagotchi.dao;
 
 import com.codecool.tamagotchi.enumerations.*;
 import com.codecool.tamagotchi.pet.Pet;
+import org.hibernate.ObjectNotFoundException;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -23,6 +25,26 @@ public class PetDaoImpl implements PetDao {
         dataBaseConnection.connectDB();
         for (Object pet : dataBaseConnection.runQuery("from Pet")) {
             stringList.add((Pet)pet);
+        }
+        return stringList;
+    }
+
+    @Override
+    public DataBaseConnection getSession() {
+        dataBaseConnection = new DataBaseConnection();
+        dataBaseConnection.connectDB();
+        return dataBaseConnection;
+    }
+
+    @Override
+    public List<Pet> selectPetById(int id) {
+        List<Pet> stringList = new ArrayList<>();
+        try {
+            for (Object pet : getSession().runQuery("FROM Pet P WHERE P.id = " + id)) {
+                stringList.add((Pet)pet);
+            }
+        } catch (ObjectNotFoundException e) {
+            return null;
         }
         return stringList;
     }

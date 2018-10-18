@@ -1,15 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{layout :: layout(~{::title}, ~{::script}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>Battle Room</title>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width"/>
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
     <script type="text/javascript" src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script type="text/javascript" src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script type="application/javascript" src="js/websocket.js" defer></script>
@@ -17,7 +9,11 @@
     <script type="application/javascript" src="js/battle/battleDom.js" defer></script>
     <script type="application/javascript" src="js/battle/battle.js" defer></script>
 </head>
+
 <body>
+
+<section>
+
     <div id="petStats" th:object="${pet}">
         <h2>Pet stats:</h2>
         <p th:text="'Name: ' + ${pet.name}" />
@@ -34,5 +30,7 @@
         <button id="evade">Evade</button>
     </div>
     <div id="log"></div>
+</section>
+
 </body>
 </html>

@@ -1,12 +1,17 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<header th:insert="fragments/general.html :: header"> </header>
+<html th:replace="~{layout :: layout(~{::title}, ~{::script}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pet</title>
+    <script></script>
+</head>
 <body>
-    <h1>Your pet:</h1>
-    <p th:text="'Name: ' + ${pet.name}" />
-    <p th:text="'Type: ' + ${pet.type}" />
-    <p th:text="'Attack: ' + ${pet.attack}" />
-    <p th:text="'Defence: ' + ${pet.defence}" />
-    <p th:text="'Speed: ' + ${pet.speed}" />
+    <section>
+        <h1>Your pet:</h1>
+        <p th:text="'Name: ' + ${pet.name}" />
+        <p th:text="'Type: ' + ${pet.type}" />
+        <p th:text="'Attack: ' + ${pet.attack}" />
+        <p th:text="'Defence: ' + ${pet.defence}" />
+        <p th:text="'Speed: ' + ${pet.speed}" />
+    </section>
 </body>
 </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html th:fragment="layout (title, script, content)" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title th:replace="${title}">Layout Title</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/assets/css/main.css}"/>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+
+    <th:block th:replace="${script}"></th:block>
+
+</head>
+<body>
+
+    <div id="wrapper" class="bg">
+        <!-- Main -->
+        <div class="main">
+            <div class="content" th:replace="${content}">
+                <p>Layout content</p>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="fixed-bottom align-content-center badge badge-dark">
+            <p class="copyright">&copy; 2018 Los Burritos. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
