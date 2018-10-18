@@ -20,6 +20,7 @@ public class TamagotchiApplication {
 	@Autowired
 	public TamagotchiApplication(PetRepository petRepository) {
 		this.petRepository = petRepository;
+		System.out.println("main repo: " + petRepository);
 	}
 
 	public static void main(String[] args) {
@@ -30,7 +31,6 @@ public class TamagotchiApplication {
 	public String home(OAuth2Authentication authentication, Model model) {
 		if (authentication != null) {
 			Long userId = new UserController().getUserId(authentication);
-			System.out.println(petRepository.findPetById(userId));
 
 			if(petRepository.findPetById(userId) == null) {
 				model.addAttribute("pet", new Pet());

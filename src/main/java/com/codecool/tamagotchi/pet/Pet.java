@@ -12,7 +12,6 @@ import java.util.Random;
 @Entity
 public class Pet {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String name;
     @NotNull

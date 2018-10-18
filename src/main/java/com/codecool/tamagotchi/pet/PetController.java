@@ -27,10 +27,8 @@ public class PetController {
 
         pet.setId(userId);
         pet.setName(username);
-        System.out.println(pet.toString());
-        System.out.println(repository);
         repository.save(pet);
-        return "index";
+        return "redirect:/";
     }
 
     @MessageMapping("/requestAllPets")
