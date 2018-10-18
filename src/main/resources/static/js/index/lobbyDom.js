@@ -19,7 +19,7 @@ let lobbyDom = {
             let div = document.createElement("div");
             div .className = "pet";
             div.appendChild(document.createTextNode( lobbyDom.roomToString(room) ));
-            lobbyDom.petsDiv.appendChild(petDiv);
+            lobbyDom.petsDiv.appendChild(div);
         });
     },
     addEventHandlerToButtons() {
