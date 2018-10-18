@@ -1,47 +1,43 @@
-<html xmlns:th="http://www.thymeleaf.org">
-<th:block th:include="fragments/general.html :: header" xmlns:th="http://www.w3.org/1999/xhtml"></th:block>
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::script}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Pet creator</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <script src="webjars/jquery/3.3.1-1/jquery.min.js" defer></script>
     <script src="js/createGotchiPointsDistribution.js" type="application/javascript" defer></script>
 
 </head>
 
 <body>
-<h1>Form</h1>
-<form action="#" th:action="@{/createPet}" th:object="${pet}" method="post">
-    <script>
-        let params = new URLSearchParams(document.location.search.substring(1));
-        let id = params.get("id");
-    </script>
-    <input id="user_id" name="user_id" th:type="text" th:field="*{user_id}" th:hidden="true">
-    <script>
-        document.getElementById('user_id').value = id;
-    </script>
-    </input>
-    <p>Name: <input id="name" type="text" th:field="*{name}" required/></p>
-
 <section>
-<h1 class="title">Pet Creator</h1>
-<form action="#" th:action="@{/room}" th:object="${pet}" method="post">
-    <div class="input-group input-group-sm mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="input-name">Name:</span>
+    <h1 class="title">Pet Creator</h1>
+    <form action="#" th:action="@{/room}" th:object="${pet}" method="post">
+        <script>
+            let params = new URLSearchParams(document.location.search.substring(1));
+            let id = params.get("id");
+        </script>
+        <input id="user_id" name="user_id" th:type="text" th:field="*{user_id}" th:hidden="true">
+        <script>
+            document.getElementById('user_id').value = id;
+        </script>
+        </input>
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="input-name">Name:</span>
+            </div>
+            <input id="name" type="text" class="form-control" aria-label="small"
+                   aria-describedby="input-name" th:field="*{name}" required/>
         </div>
-        <input id="name" type="text" class="form-control" aria-label="small"
-               aria-describedby="input-name" th:field="*{name}" required />
-    </div>
-    <p>
-        Type:
-        <select name="type" th:field="*{type}" class="form-control" id="type" required>
-            <option class="form-group" value="" disabled selected hidden>Choose type attack</option>
-            <option th:each="primary : ${T(com.codecool.tamagotchi.enumerations.Type).values()}"
-                    th:value="${primary}"
-                    th:text="${primary}"
-                    th:class="${primary.groupType}">
-            </option>
-        </select>
+        <p>
+            Type:
+            <select name="type" th:field="*{type}" class="form-control" id="type" required>
+                <option class="form-group" value="" disabled selected hidden>Choose type attack</option>
+                <option th:each="primary : ${T(com.codecool.tamagotchi.enumerations.Type).values()}"
+                        th:value="${primary}"
+                        th:text="${primary}"
+                        th:class="${primary.groupType}">
+                </option>
+            </select>
         </p>
         <p>You have <span id="points-left">200</span> points left</p>
         <div class="input-group input-group-sm mb-3">
@@ -49,7 +45,7 @@
                 <span class="input-group-text" id="input-attack">Attack:</span>
             </div>
             <input id="attack-input" type="number" class="form-control" aria-label="small"
-                   aria-describedby="input-attack" th:field="*{attack}" required />
+                   aria-describedby="input-attack" th:field="*{attack}" required/>
         </div>
 
         <div class="input-group input-group-sm mb-3">
@@ -57,7 +53,7 @@
                 <span class="input-group-text" id="input-defence">Defence:</span>
             </div>
             <input id="defence-input" type="number" class="form-control" aria-label="small"
-                   aria-describedby="input-defence" th:field="*{defence}" required />
+                   aria-describedby="input-defence" th:field="*{defence}" required/>
         </div>
 
         <div class="input-group input-group-sm mb-3">
@@ -65,11 +61,8 @@
                 <span class="input-group-text" id="input-speed">Speed:</span>
             </div>
             <input id="speed-input" type="number" class="form-control" aria-label="small"
-                   aria-describedby="input-speed" th:field="*{speed}" required />
+                   aria-describedby="input-speed" th:field="*{speed}" required/>
         </div>
         <p><input id="submit-button" class="btn btn-success" type="submit" value="Submit" disabled="true"/></p>
     </form>
 </section>
-
-</body>
-</html>

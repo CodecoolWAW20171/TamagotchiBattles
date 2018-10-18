@@ -1,5 +1,6 @@
 package com.codecool.tamagotchi.battle;
 
+import com.codecool.tamagotchi.controller.ManagePet;
 import com.codecool.tamagotchi.pet.Pet;
 import com.codecool.tamagotchi.pet.PetRepository;
 import com.codecool.tamagotchi.user.UserController;
@@ -10,7 +11,9 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -24,6 +27,16 @@ public class BattleController {
     public BattleController(BattleRepository repository, PetRepository petRepository) {
         this.repository = repository;
         this.petRepository = petRepository;
+    }
+
+    @PostMapping("/room")
+    public String connectRoom(OAuth2Authentication authentication, Model model, @ModelAttribute Pet pet) {
+        ManagePet mp = new ManagePet();
+        mp.addPet(pet);
+        String username = new UserController().getUsername(authentication);
+        pet.setName(username);
+        model.addAttribute("pet", pet);
+        return "battle";
     }
 
     @RequestMapping("/room/{id}")

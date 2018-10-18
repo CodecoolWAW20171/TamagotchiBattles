@@ -77,14 +77,6 @@ public class Pet {
     @Transient
     private int playersTwoDefencePoints;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
     public Pet() {}
 
     public Pet(String name, int attack, int defence, int speed, Type type) {

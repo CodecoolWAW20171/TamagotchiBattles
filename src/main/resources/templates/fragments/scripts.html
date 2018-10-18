@@ -2,7 +2,7 @@
 <div th:fragment="indexScript" xmlns:th="http://www.thymeleaf.org">
         $.get("/user", function(data) {
             if(data) {
-                $(location).attr('href', '/createPet')
+                $(location).attr('href', '/createPet?id='+data.id)
             }
         });
 
