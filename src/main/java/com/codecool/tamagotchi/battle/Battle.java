@@ -22,6 +22,10 @@ public class Battle {
     private String battleFinalString;
     private boolean isGameOver;
 
+    public Long getId() {
+        return id;
+    }
+
     private void getOrder() {
         firstPlayerHealthAtStartOfTurn = getFirstPlayer().getHealth();
         secondPlayerHealthAtStartOfTurn = getSecondPlayer().getHealth();

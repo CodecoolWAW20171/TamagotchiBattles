@@ -33,6 +33,10 @@ public class Pet {
     // this variable is set in case second player is defending
     private int playersTwoDefencePoints;
 
+    public Long getId() {
+        return id;
+    }
+
     public Pet() {}
 
     public Pet(String name, int attack, int defence, int speed, Type type) {
