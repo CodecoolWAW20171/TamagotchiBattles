@@ -9,4 +9,10 @@ let lobbyService = {
     requestAllPets() {
         return this.client.send("/app/requestAllPets");
     },
+    fetchAllRooms() {
+        return this.client.subscribe("/lobby/battles")
+    },
+    requestAllRooms() {
+        return this.client.send("/app/requestAllBattles");
+    }
 };

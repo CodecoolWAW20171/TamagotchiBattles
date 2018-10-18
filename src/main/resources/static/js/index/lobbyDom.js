@@ -8,9 +8,17 @@ let lobbyDom = {
     },
     showPets(pets) {
         pets.forEach(pet => {
-            let petDiv = document.createElement("div");
-            petDiv.className = "pet";
-            petDiv.appendChild(document.createTextNode( lobbyDom.petStatsToString(pet) ));
+            let div = document.createElement("div");
+            div.className = "pet";
+            div.appendChild(document.createTextNode( lobbyDom.petStatsToString(pet) ));
+            lobbyDom.petsDiv.appendChild(div);
+        });
+    },
+    showRooms(rooms) {
+        rooms.forEach(room => {
+            let div = document.createElement("div");
+            div .className = "pet";
+            div.appendChild(document.createTextNode( lobbyDom.roomToString(room) ));
             lobbyDom.petsDiv.appendChild(petDiv);
         });
     },
@@ -31,5 +39,8 @@ let lobbyDom = {
             "\nDefence: " + pet.defence +
             "\nSpeed: " + pet.speed +
             "\nType: " + pet.type;
+    },
+    roomToString(room) {
+        return "id: " + room.id;
     }
 };
