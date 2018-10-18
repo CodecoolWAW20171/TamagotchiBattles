@@ -8,7 +8,8 @@
 </head>
 <body>
 <h1>Form</h1>
-<form action="#" th:action="@{/room}" th:object="${pet}" method="post">
+<form action="#" th:action="@{/createPet}" th:object="${pet}" method="post">
+    <p>Name: <input id="name" type="text" th:field="*{name}" required /></p>
     <p>
         Type:
         <select name="type" th:field="*{type}" class="form-control" id="type" required>

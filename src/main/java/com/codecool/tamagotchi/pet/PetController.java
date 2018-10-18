@@ -14,6 +14,7 @@ public class PetController {
     @GetMapping("/createPet")
     public String petForm(Model model) {
         model.addAttribute("pet", new Pet());
+        System.out.println("OK!!!!!!");
         return "createPet";
     }
 

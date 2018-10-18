@@ -49,12 +49,16 @@ public class Pet {
     @Column(name = "health")
     private double health = 100;
 
+    @Transient
     private Action state;
 
+    @Transient
     private final double REDUCTION_VALUE = 0.75;
+    @Transient
     private final double UPGRADE_VALUE = 1.25;
 
     // this variable is set in case second player is defending
+    @Transient
     private int playersTwoDefencePoints;
 
     public void primaryAttack(Pet player) {
