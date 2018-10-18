@@ -3,53 +3,39 @@ package com.codecool.tamagotchi.pet;
 import com.codecool.tamagotchi.enumerations.Action;
 import com.codecool.tamagotchi.enumerations.Type;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.Random;
-import javax.persistence.*;
 
 @Entity
 public class Pet {
     @Id
     private Long id;
     private String name;
-
     @NotNull
     private int attack;
-
     @NotNull
     private int defence;
-
     @NotNull
     private int speed;
-
     @NotNull
     private Type type;
-
     private int exp = 0;
-
     private double health = 100;
-
-    @Transient
     private Action state;
 
-    @Transient
     private final double REDUCTION_VALUE = 0.75;
-    @Transient
     private final double UPGRADE_VALUE = 1.25;
 
     // this variable is set in case second player is defending
-    @Transient
     private int playersTwoDefencePoints;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Pet() {}
