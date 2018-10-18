@@ -37,6 +37,10 @@ public class Pet {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Pet() {}
 
     public Pet(String name, int attack, int defence, int speed, Type type) {
@@ -117,7 +121,7 @@ public class Pet {
         return name;
     }
 
-    public void setName(String name) {
+    void setName(String name) {
         this.name = name;
     }
 
@@ -165,7 +169,7 @@ public class Pet {
         return health;
     }
 
-    public void setHealth(double health) {
+    private void setHealth(double health) {
         this.health = health;
     }
 
@@ -177,23 +181,24 @@ public class Pet {
         this.state = state;
     }
 
-    public int getPlayersTwoDefencePoints() {
+    private int getPlayersTwoDefencePoints() {
         return playersTwoDefencePoints;
     }
 
-    public void setPlayersTwoDefencePoints(int playersTwoDefencePoints) {
+    private void setPlayersTwoDefencePoints(int playersTwoDefencePoints) {
         this.playersTwoDefencePoints = playersTwoDefencePoints;
     }
 
     @Override
     public String toString() {
-        return  "name: " + name + "\n" +
-                "type: " + type + "\n" +
-                "exp: " + exp + "\n" +
-                "attack: " + attack + "\n" +
-                "defence: " + defence + "\n" +
-                "speed: " + speed + "\n" +
-                "health: " + health + "\n" +
-                "state: " + state + "\n";
+        return  "\nid: " + id +
+                "\nname: " + name +
+                "\ntype: " + type +
+                "\nexp: " + exp +
+                "\nattack: " + attack +
+                "\ndefence: " + defence +
+                "\nspeed: " + speed +
+                "\nhealth: " + health +
+                "\nstate: " + state;
     }
 }

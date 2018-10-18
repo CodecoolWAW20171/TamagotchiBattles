@@ -1,23 +1,36 @@
 package com.codecool.tamagotchi.pet;
 
-import com.codecool.tamagotchi.enumerations.Type;
+import com.codecool.tamagotchi.user.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class PetController {
 
-    @Autowired
-    private PetRepository repository;
+    private final PetRepository repository;
 
-    @GetMapping("/createPet")
-    public String petForm(Model model) {
-        model.addAttribute("pet", new Pet());
-        return "createPet";
+    @Autowired
+    public PetController(PetRepository repository) {
+        this.repository = repository;
+    }
+
+    @PostMapping("/addNewPet")
+    public String addNewPet(OAuth2Authentication authentication, @ModelAttribute Pet pet) {
+        UserController uc = new UserController();
+        Long userId = uc.getUserId(authentication);
+        String username = uc.getUsername(authentication);
+
+        pet.setId(userId);
+        pet.setName(username);
+        System.out.println(pet.toString());
+        System.out.println(repository);
+        repository.save(pet);
+        return "index";
     }
 
     @MessageMapping("/requestAllPets")
