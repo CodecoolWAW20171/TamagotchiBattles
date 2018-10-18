@@ -11,53 +11,26 @@ import java.util.Random;
 import javax.persistence.*;
 
 @Entity
-<<<<<<< HEAD
-@Table(name = "pets")
-public class Pet {
-
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Column(name = "name")
-    @NotNull
-=======
 public class Pet {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
->>>>>>> Lobby
     private String name;
 
-    @Column(name = "attack")
     @NotNull
     private int attack;
 
-    @Column(name = "defence")
     @NotNull
     private int defence;
 
-    @Column(name = "speed")
     @NotNull
     private int speed;
 
-    @Column(name = "type")
     @NotNull
     private Type type;
 
-    @Column(name = "exp")
     private int exp = 0;
 
-    @Column(name = "health")
     private double health = 100;
 
     @Transient
@@ -71,6 +44,10 @@ public class Pet {
     // this variable is set in case second player is defending
     @Transient
     private int playersTwoDefencePoints;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;

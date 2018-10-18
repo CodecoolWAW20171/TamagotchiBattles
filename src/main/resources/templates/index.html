@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html th:replace="~{layout :: layout(~{::title}, ~{::script}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Index</title>
+
+    <script type="text/javascript" src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script type="text/javascript" src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script type="application/javascript" src="js/websocket.js" defer></script>
+    <script type="application/javascript" src="js/index/lobbyService.js" defer></script>
+    <script type="application/javascript" src="js/index/lobbyDom.js" defer></script>
+    <script type="application/javascript" src="js/index/lobby.js" defer></script>
 
     <script th:include="fragments/scripts :: indexScript" th:defer="true" type="text/javascript"></script>
 
@@ -12,50 +18,18 @@
 <body>
 
 <section>
-
-    <h1 class="title">Tamagotchi battles</h1><br>
-    <div class="container">
-        <div class="container unauthenticated">
-           With Facebook: <a href="/login">click here</a>
-        </div>
-    </div>
-
-</section>
-
-=======
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Battle Room</title>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width"/>
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
-    <script type="text/javascript" src="/webjars/sockjs-client/sockjs.min.js"></script>
-    <script type="text/javascript" src="/webjars/stomp-websocket/stomp.min.js"></script>
-    <script type="application/javascript" src="js/websocket.js" defer></script>
-    <script type="application/javascript" src="js/index/lobbyService.js" defer></script>
-    <script type="application/javascript" src="js/index/lobbyDom.js" defer></script>
-    <script type="application/javascript" src="js/index/lobby.js" defer></script>
-</head>
-<body>
-<div class="container">
     <h1>Home</h1>
 
     <div id="actionBar">
-        <form action="/logout" method="post"><button type="submit">Logout</button></form>
-        <button id="showPets">Pets</button>
-        <button id="showRooms">Rooms</button>
-        <button id="addRoom">Add room</button>
+        <button type="submit" class="btn btn-info" th:action="@{/logout}">Logout</button>
+        <button id="showPets" class="btn btn-success">Pets</button>
+        <button id="showRooms" class="btn btn-success">Rooms</button>
+        <button id="addRoom" class="btn btn-danger">Add room</button>
     </div>
 
     <div id="petsDiv"></div>
     <div id="roomsDiv"></div>
+</section>
 
-</div>
->>>>>>> Lobby
 </body>
 </html>
