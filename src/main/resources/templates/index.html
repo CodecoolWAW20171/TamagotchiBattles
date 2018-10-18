@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html th:replace="~{layout :: layout(~{::title}, ~{::script}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -21,5 +22,40 @@
 
 </section>
 
+=======
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Battle Room</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+    <script type="text/javascript" src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script type="text/javascript" src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script type="application/javascript" src="js/websocket.js" defer></script>
+    <script type="application/javascript" src="js/index/lobbyService.js" defer></script>
+    <script type="application/javascript" src="js/index/lobbyDom.js" defer></script>
+    <script type="application/javascript" src="js/index/lobby.js" defer></script>
+</head>
+<body>
+<div class="container">
+    <h1>Home</h1>
+
+    <div id="actionBar">
+        <form action="/logout" method="post"><button type="submit">Logout</button></form>
+        <button id="showPets">Pets</button>
+        <button id="showRooms">Rooms</button>
+        <button id="addRoom">Add room</button>
+    </div>
+
+    <div id="petsDiv"></div>
+    <div id="roomsDiv"></div>
+
+</div>
+>>>>>>> Lobby
 </body>
 </html>
