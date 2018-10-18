@@ -1,6 +1,5 @@
 package com.codecool.tamagotchi.battle;
 
-import com.codecool.tamagotchi.enumerations.Type;
 import com.codecool.tamagotchi.pet.Pet;
 import com.codecool.tamagotchi.pet.PetRepository;
 import com.codecool.tamagotchi.user.UserController;
@@ -30,7 +29,7 @@ public class BattleController {
     @RequestMapping("/room/{id}")
     public String connectRoom(OAuth2Authentication authentication,
                               Model model,
-                              @PathVariable String id) {
+                              @PathVariable Long id) {
         Long userId = Long.valueOf(new UserController().getUserId(authentication));
         Pet userPet = petRepository.findPetById(userId);
 
@@ -44,7 +43,7 @@ public class BattleController {
     public BattleLog log(OAuth2Authentication authentication, String message, @DestinationVariable Long id) {
         String username = new UserController().getUsername(authentication);
 
-        return repository.findBattleById(String.valueOf(id)).setPlayerAction(username, message);
+        return repository.findBattleById(id).setPlayerAction(username, message);
     }
 
     @MessageMapping("/requestAllBattles")

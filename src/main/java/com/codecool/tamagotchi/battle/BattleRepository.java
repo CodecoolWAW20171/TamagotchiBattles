@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface BattleRepository extends CrudRepository<Battle, Long>{
 
-    Battle findBattleById(String id);
+    Battle findBattleById(Long id);
 
 }
