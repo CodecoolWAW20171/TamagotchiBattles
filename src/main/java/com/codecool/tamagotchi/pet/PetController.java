@@ -22,7 +22,7 @@ public class PetController {
 
     @MessageMapping("/requestAllPets")
     @SendTo("/lobby/pets")
-    public Iterable<Pet> petList() {
+    public Iterable<Pet> petsList() {
         return repository.findAll();
     }
 
