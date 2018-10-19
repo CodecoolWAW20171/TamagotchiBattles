@@ -41,4 +41,9 @@ public class TamagotchiApplication {
 		return "login";
 	}
 
+	@RequestMapping("/login")
+	public String goHomeUAreDrunk() {
+		return "/";
+	}
+
 }

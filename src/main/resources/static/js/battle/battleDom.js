@@ -7,7 +7,6 @@ let battleDom = {
         this.addEventHandlerToButtons();
     },
     addLog(log) {
-        console.log("###\naddLog log: " + log + "\n###");
         let msg = document.createElement("div");
         msg.className = "log";
         msg.appendChild(document.createTextNode( log ));
