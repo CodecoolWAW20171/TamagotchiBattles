@@ -4,8 +4,8 @@ let lobbyDom = {
     init() {
         lobbyService.requestAllPets();
         lobbyService.requestAllRooms();
-        this.petsDiv = $("#petsDiv");
-        this.roomsDiv = $("#roomsDiv");
+        this.petsDiv = $("#petsDiv").get(0);
+        this.roomsDiv = $("#roomsDiv").get(0);
         this.addEventHandlerToButtons();
     },
     showPets(pets) {
@@ -26,12 +26,12 @@ let lobbyDom = {
     },
     addEventHandlerToButtons() {
         $("#showPets").click(function() {
-            lobbyDom.roomsDiv.hide();
-            lobbyDom.petsDiv.show();
+            $("#roomsDiv").hide();
+            $("#petsDiv").show();
         });
         $("#showRooms").click(function() {
-            lobbyDom.petsDiv.hide();
-            lobbyDom.roomsDiv.show();
+            $("#petsDiv").hide();
+            $("#roomsDiv").show();
         });
         $("#addRoom").click(function () {
            lobbyService.addNewRoom();
